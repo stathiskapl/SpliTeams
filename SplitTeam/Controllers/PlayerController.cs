@@ -31,5 +31,19 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllBetsForUser()
+        {
+            try
+            {
+                var players = await _playerService.GetAllPlayers();
+                return Ok(players);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
