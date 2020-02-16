@@ -1,0 +1,7 @@
+﻿αν θες να κανεις migrations 
+dotnet ef migrations add "onomaMigration"
+αν θες να κανεις update τη βαση με όλα τα migrations
+dotnet ef database update
+αν θες να διαγραψεις το τελευταιο migration ΧΩΡΙΣ ΟΜΩΣ να εχεις τρέξει update 
+dotnet ef migrations remove
+αλλά ότι και να γίνει στο run τα τρέχει αυτόματα!

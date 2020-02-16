@@ -1,0 +1,28 @@
+﻿using SplitTeam.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using SplitTeam.Repositories;
+
+namespace SplitTeam.Services
+{
+    public interface IPlayerService
+    {
+        Task<Player> AddPlayer(Player player);
+    }
+
+    public class PlayerService : IPlayerService
+    {
+        private readonly IPlayerRepository _repository;
+
+        public PlayerService(IPlayerRepository repository)
+        {
+            _repository = repository;
+        }
+        public async Task<Player> AddPlayer(Player player)
+        {
+            return await _repository.AddPlayer(player);
+        }
+    }
+}

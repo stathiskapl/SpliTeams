@@ -13,6 +13,11 @@ namespace SplitTeam.Model
         {
 
         }
+
+        public virtual DbSet<Player> Players { get; set; }
+        public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<PlayerRank> PlayerRanks { get; set; }
+
         public override int SaveChanges()
         {
             AddTimestamps();
@@ -24,19 +29,22 @@ namespace SplitTeam.Model
             AddTimestamps();
             return base.SaveChangesAsync();
         }
+
         private void AddTimestamps()
         {
-            var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
+            var entities = ChangeTracker.Entries().Where(x =>
+                x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
             foreach (var entity in entities)
             {
                 if (entity.State == EntityState.Added)
                 {
-                    ((BaseEntity)entity.Entity).CreatedOnDateTime = DateTime.Now;
+                    ((BaseEntity) entity.Entity).CreatedOnDateTime = DateTime.Now;
                 }
-                ((BaseEntity)entity.Entity).UpdatedOnDateTime = DateTime.Now;
+
+                ((BaseEntity) entity.Entity).UpdatedOnDateTime = DateTime.Now;
             }
         }
     }
 }
-}
+
