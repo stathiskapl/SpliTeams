@@ -46,6 +46,10 @@ namespace SplitTeam
             });
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerRepository, PlayerRepository>();
+            services.AddTransient<ISkillService, SkillService>();
+            services.AddTransient<ISkillRepository, SkillRepository>();
+            services.AddTransient<IPlayerRankService, PlayerRankService>();
+            services.AddTransient<IPlayerRankRepository, PlayerRankRepository>();
 
         }
 
