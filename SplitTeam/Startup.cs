@@ -32,7 +32,7 @@ namespace SplitTeam
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors();
             services.AddDbContext<DataContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().AddJsonOptions(o =>
             {
@@ -40,6 +40,7 @@ namespace SplitTeam
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Slit Teams Api", Version = "v1" });
@@ -71,6 +72,8 @@ namespace SplitTeam
             }
 
             app.UseHttpsRedirection();
+            string[] origins = new string[] { "http://localhost:4200" };
+            app.UseCors(b => b.AllowAnyMethod().AllowAnyHeader().WithOrigins(origins));
             app.UseMvc();
         }
     }
