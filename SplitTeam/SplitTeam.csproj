@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="angular\" />
+    <Compile Remove="angular\**" />
+    <Content Remove="angular\**" />
+    <EmbeddedResource Remove="angular\**" />
+    <None Remove="angular\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

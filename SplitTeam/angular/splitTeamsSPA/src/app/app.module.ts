@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { PlayerService } from './Services/player.service';
 
 @NgModule({
    declarations: [
@@ -14,7 +15,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
       BrowserModule,
       AppRoutingModule
    ],
-   providers: [],
+   providers: [
+      PlayerService
+   ],
    bootstrap: [
       AppComponent
    ]

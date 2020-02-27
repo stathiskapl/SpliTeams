@@ -1,31 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
-    <div class="collapse navbar-collapse" *ngIf="loggedIn()">
-      <a class="navbar-brand" [routerLink]="['/games']">Bet App</a>
+    <div class="collapse navbar-collapse">
+      <a class="navbar-brand" [routerLink]="['/games']">Split Team App</a>
       <div class="navbar-nav-scroll">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/incomes']">Incomes </a>
+            <a class="nav-link" [routerLink]="['/players']">Players </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/expenses']">Expenses </a>
+            <a class="nav-link" [routerLink]="['/skills']">Skills </a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/bets']">Bets</a>
+            <a class="nav-link" [routerLink]="['/rankings']">Rankings</a>
           </li>
         </ul>
       </div>
     </div>
-    <div *ngIf="loggedIn()">
       <span class="mr-1"> </span>
       <a class="font-weight-bold">
-        Welcome {{ userService.decodedToken?.unique_name | titlecase }}
+        Welcome
       </a>
 
       <button
         class="btn btn-danger my-2 my-sm-0 ml-2"
         type="submit"
-        (click)="logout()"
       >
         Logout
       </button>
@@ -33,9 +31,6 @@
 
     <form
       class="form-inline my-2 my-lg-0"
-      (ngSubmit)="login()"
-      #loginForm="ngForm"
-      *ngIf="!loggedIn()"
     >
       <input
         class="form-control mr-sm-2"
@@ -43,7 +38,6 @@
         name="username"
         required
         placeholder="Username"
-        [(ngModel)]="model.username"
       />
       <input
         class="form-control mr-sm-2"
@@ -51,15 +45,12 @@
         name="password"
         required
         placeholder="Password"
-        [(ngModel)]="model.password"
       />
       <button
         class="btn btn-success my-2 my-sm-0"
         type="submit"
-        [disabled]="!loginForm.valid"
       >
         Login
       </button>
     </form>
-  </div>
 </nav>
