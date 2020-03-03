@@ -71,10 +71,13 @@ namespace SplitTeam
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            string[] origins = new string[] { "http://localhost:4200" };
-            app.UseCors(b => b.AllowAnyMethod().AllowAnyHeader().WithOrigins(origins));
+            //app.UseHttpsRedirection();
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
             app.UseMvc();
+
         }
     }
 }

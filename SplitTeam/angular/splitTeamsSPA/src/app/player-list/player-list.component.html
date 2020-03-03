@@ -1,3 +1,15 @@
-<p>
-  player-list works!
-</p>
+<div class="container mt-4">
+  <table class="table table-bordered">
+    <thead>
+      <th> Id </th>
+      <th> Name </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let player of players">
+        <td>{{player.id}} </td>
+        <td> {{player.name}} </td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>
