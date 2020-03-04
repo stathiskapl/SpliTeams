@@ -2,20 +2,20 @@
   <div class="row ">
     <div class="col-lg-4 form-group ">
       <input
-        [(ngModel)]="playerName"
+        [(ngModel)]="skillName"
         class="form-control"
         type="string"
-        placeholder="Player Name"
+        placeholder="Skill Name"
         required
       />
     </div>
     <div class="col-lg-4 form-group ">
       <button
         class="btn btn-success"
-        (click)="addPlayer()"
-        [disabled]="playerName === ''"
+        (click)="addSkill()"
+        [disabled]="skillName === ''"
       >
-        Add Player
+        Add Skill
       </button>
     </div>
   </div>
@@ -24,14 +24,12 @@
       <tr>
         <th style="width: 25%">Id</th>
         <th style="width: 25%">Name</th>
-        <th style="width: 25%">Average Rank</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let player of players">
-        <th scope="row" style="width: 25%">{{ player?.id }}</th>
-        <td style="width: 25%">{{ player?.name }}</td>
-        <td style="width: 25%"></td>
+      <tr *ngFor="let skill of skills">
+        <th scope="row" style="width: 25%">{{ skill?.id }}</th>
+        <td style="width: 25%">{{ skill?.name }}</td>
       </tr>
     </tbody>
   </table>

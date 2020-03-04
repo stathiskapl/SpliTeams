@@ -9,10 +9,13 @@ import { Player } from '../_modules/player';
 })
 export class PlayerService {
 
-constructor(private http: HttpClient) { }
-baseUrl = environment.apiUrl;
+  constructor(private http: HttpClient) { }
+  baseUrl = environment.apiUrl;
 
-getAllPayers(): Observable<Player[]> {
-  return this.http.get<Player[]>(this.baseUrl + 'Player/GetAll');
-}
+  getAllPayers(): Observable<Player[]> {
+    return this.http.get<Player[]>(this.baseUrl + 'Player/GetAll');
+  }
+  createPlayer(player: Player): Observable<Player> {
+    return this.http.post<Player>(this.baseUrl + 'Player/Create', player);
+  }
 }

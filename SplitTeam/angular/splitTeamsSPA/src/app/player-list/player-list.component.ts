@@ -10,9 +10,22 @@ import { Player } from '../_modules/player';
 export class PlayerListComponent implements OnInit {
 
   constructor(private playerService: PlayerService) { }
+  playerName = '';
+
   players: Player[];
   ngOnInit() {
     this.getAllPayers();
+  }
+  addPlayer() {
+    const playerToadd: Player = {};
+    playerToadd.name = this.playerName;
+    this.playerService.createPlayer(playerToadd).subscribe((data: Player) => {
+      this.getAllPayers();
+      this.playerName = '';
+    },
+      error => {
+        console.log(error.message);
+      });
   }
 
   getAllPayers() {

@@ -1,4 +1,4 @@
-export interface Player {
+export interface Skill {
     id?: number;
     name?: string;
 }
