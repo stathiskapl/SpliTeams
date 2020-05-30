@@ -10,6 +10,7 @@ namespace SplitTeam.Services
     public interface IPlayerService
     {
         Task<Player> AddPlayer(Player player);
+        Task<bool> DeletePlayer(int playerId);
         Task<List<Player>> GetAllPlayers();
     }
 
@@ -24,6 +25,11 @@ namespace SplitTeam.Services
         public async Task<Player> AddPlayer(Player player)
         {
             return await _repository.AddPlayer(player);
+        }
+
+        public async Task<bool> DeletePlayer(int playerId)
+        {
+            return await _repository.DeletePlayer(playerId);
         }
 
         public async Task<List<Player>> GetAllPlayers()

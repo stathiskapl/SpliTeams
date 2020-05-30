@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../Services/player.service';
 import { Player } from '../_modules/player';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-player-list',
@@ -9,12 +10,23 @@ import { Player } from '../_modules/player';
 })
 export class PlayerListComponent implements OnInit {
 
-  constructor(private playerService: PlayerService) { }
+  constructor(private playerService: PlayerService, private toastr: ToastrService) { }
   playerName = '';
 
   players: Player[];
   ngOnInit() {
     this.getAllPayers();
+  }
+  deletePlayer(playerId: number) {
+
+    this.playerService.deletePlayer(playerId).subscribe(() => {
+      this.getAllPayers();
+      this.toastr.success('Player Deleted');
+    },
+      error => {
+        console.log(error.message);
+        this.toastr.error('Error!', error.message);
+      });
   }
   addPlayer() {
     const playerToadd: Player = {};

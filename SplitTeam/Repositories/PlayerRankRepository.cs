@@ -11,6 +11,9 @@ namespace SplitTeam.Repositories
     {
         Task<PlayerRank> AddNewPlayerRank(PlayerRankCreateDTO playerRankCreateDto);
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
+        Task<List<PlayerRank>> GetAll();
+
+
     }
 
     public class PlayerRankRepository : IPlayerRankRepository
@@ -36,6 +39,14 @@ namespace SplitTeam.Repositories
             await _context.PlayerRanks.AddAsync(playerRank);
             await _context.SaveChangesAsync();
             return playerRank;
+        }
+
+        public async Task<List<PlayerRank>> GetAll()
+        {
+            return await _context.PlayerRanks
+                .Include(x => x.Skill)
+                .Include(x => x.Player)
+                .ToListAsync();
         }
 
         public async Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId)

@@ -31,7 +31,19 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
-
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var isDeleted = await _playerService.DeletePlayer(id);
+                return Ok(isDeleted);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAllBetsForUser()
         {

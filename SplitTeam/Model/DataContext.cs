@@ -42,7 +42,11 @@ namespace SplitTeam.Model
                     ((BaseEntity) entity.Entity).CreatedOnDateTime = DateTime.Now;
                 }
 
-                ((BaseEntity) entity.Entity).UpdatedOnDateTime = DateTime.Now;
+                else if (entity.State == EntityState.Modified)
+                {
+                    ((BaseEntity) entity.Entity).UpdatedOnDateTime = DateTime.Now;
+                }
+
             }
         }
     }

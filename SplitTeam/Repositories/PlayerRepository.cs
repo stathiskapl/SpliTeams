@@ -10,6 +10,7 @@ namespace SplitTeam.Repositories
     public interface IPlayerRepository
     {
         Task<Player> AddPlayer(Player player);
+        Task<bool> DeletePlayer(int playerId);
         Task<List<Player>> GetAllPlayers();
     }
 
@@ -26,6 +27,14 @@ namespace SplitTeam.Repositories
             await _context.Players.AddAsync(player);
             await _context.SaveChangesAsync();
             return player;
+        }
+
+        public async Task<bool> DeletePlayer(int playerId)
+        {
+            var player = await _context.Players.FirstOrDefaultAsync(p => p.Id == playerId);
+            var playerDeleted = _context.Remove(player);
+            _context.SaveChanges();
+            return playerDeleted == null ? false : true;
         }
 
         public async Task<List<Player>> GetAllPlayers()
