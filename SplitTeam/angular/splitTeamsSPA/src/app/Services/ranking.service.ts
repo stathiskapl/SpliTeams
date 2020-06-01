@@ -18,4 +18,7 @@ export class RankingService {
   createPlayerRank(playerRank: Ranking): Observable<Ranking> {
     return this.http.post<Ranking>(this.baseUrl + 'Player/Create', playerRank);
   }
+  getAllRankingsForPlayer(playerId: number): Observable<Ranking[]> {
+    return this.http.get<Ranking[]>(this.baseUrl + 'PlayerRank/GetAllForPlayer/' + playerId);
+  }
 }

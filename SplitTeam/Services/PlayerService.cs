@@ -17,14 +17,19 @@ namespace SplitTeam.Services
     public class PlayerService : IPlayerService
     {
         private readonly IPlayerRepository _repository;
+        private readonly IPlayerRankService _playerRankService;
 
-        public PlayerService(IPlayerRepository repository)
+        public PlayerService(IPlayerRepository repository, IPlayerRankService playerRankService)
         {
+            _playerRankService = playerRankService;
             _repository = repository;
         }
         public async Task<Player> AddPlayer(Player player)
         {
-            return await _repository.AddPlayer(player);
+
+            await _repository.AddPlayer(player);
+            await _playerRankService.AddPlayerRankWhenPlayerCreated(player.Id);
+            return player;
         }
 
         public async Task<bool> DeletePlayer(int playerId)

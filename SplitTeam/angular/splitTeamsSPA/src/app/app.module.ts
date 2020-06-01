@@ -6,12 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PlayerService } from './Services/player.service';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { CommonModule } from '@angular/common';
+import { RankingsListComponent } from './rankings-list/rankings-list.component';
 
 @NgModule({
    declarations: [
@@ -19,16 +20,18 @@ import { CommonModule } from '@angular/common';
       NavBarComponent,
       PlayerDetailComponent,
       PlayerListComponent,
-      SkillListComponent
+      SkillListComponent,
+      RankingsListComponent
    ],
    imports: [
+      BrowserModule,
       HttpClientModule,
       CommonModule,
       ToastrModule.forRoot(),
-      BrowserModule,
+      ReactiveFormsModule,
       AppRoutingModule,
       FormsModule,
-      BrowserAnimationsModule,
+      BrowserAnimationsModule
    ],
    providers: [
       PlayerService
