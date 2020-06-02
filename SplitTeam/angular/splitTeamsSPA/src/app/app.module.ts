@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
+import { SidebarModule } from 'ng-sidebar';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,6 +30,7 @@ import { RankingsListComponent } from './rankings-list/rankings-list.component';
       CommonModule,
       ToastrModule.forRoot(),
       ReactiveFormsModule,
+      SidebarModule.forRoot(),
       AppRoutingModule,
       FormsModule,
       BrowserAnimationsModule

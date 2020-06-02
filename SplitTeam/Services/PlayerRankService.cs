@@ -52,7 +52,8 @@ namespace SplitTeam.Services
                 var player = new PlayerRankCreateDTO()
                 {
                     PlayerId = playerId,
-                    SkillId = skill.Id
+                    SkillId = skill.Id,
+                    Rank = -1
                 };
                 await _repository.AddNewPlayerRank(player);
                 listToReturn.Add(player);

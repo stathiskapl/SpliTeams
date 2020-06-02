@@ -7,7 +7,8 @@ import { SkillListComponent } from './skill-list/skill-list.component';
 import { RankingsListComponent } from './rankings-list/rankings-list.component';
 
 
-const routes: Routes = [ 
+const routes: Routes = [
+  { path: '', component: PlayerListComponent },
   { path: 'home', component: NavBarComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'skills', component: SkillListComponent },
