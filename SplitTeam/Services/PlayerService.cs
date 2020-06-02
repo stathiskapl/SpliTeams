@@ -11,6 +11,7 @@ namespace SplitTeam.Services
     {
         Task<Player> AddPlayer(Player player);
         Task<bool> DeletePlayer(int playerId);
+        Task<bool> DeletePlayerWithRanks(int playerId);
         Task<List<Player>> GetAllPlayers();
     }
 
@@ -35,6 +36,11 @@ namespace SplitTeam.Services
         public async Task<bool> DeletePlayer(int playerId)
         {
             return await _repository.DeletePlayer(playerId);
+        }
+
+        public async Task<bool> DeletePlayerWithRanks(int playerId)
+        {
+            return await _repository.DeletePlayerWithRanks(playerId);
         }
 
         public async Task<List<Player>> GetAllPlayers()

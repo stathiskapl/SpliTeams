@@ -21,4 +21,7 @@ export class PlayerService {
   deletePlayer(id: number) {
     return this.http.delete(this.baseUrl + 'Player/Delete/' + id);
   }
+  deletePlayerWithRanks(id: number) {
+    return this.http.delete(this.baseUrl + 'Player/DeleteWithRanks/' + id);
+  }
 }

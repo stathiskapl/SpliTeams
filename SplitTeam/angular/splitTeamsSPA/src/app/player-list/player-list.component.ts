@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../Services/player.service';
 import { Player } from '../_modules/player';
 import { ToastrService } from 'ngx-toastr';
+import { NgbModalOptions, ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-player-list',
@@ -9,13 +10,48 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
-
-  constructor(private playerService: PlayerService, private toastr: ToastrService) { }
+  closeResult: string;
+  modalOptions: NgbModalOptions;
+  constructor(private playerService: PlayerService, private toastr: ToastrService, private modalService: NgbModal) {
+    this.modalOptions = {
+      backdrop: 'static',
+      backdropClass: 'customBackdrop'
+    }
+  }
   playerName = '';
 
   players: Player[];
   ngOnInit() {
     this.getAllPayers();
+  }
+
+  open(content, playerId) {
+    this.modalService.open(content, this.modalOptions).result.then((result) => {
+      if (result === 'Delete') {
+        console.log('diagrafi playerId');
+        console.log(playerId);
+        this.deletePlayerWithRanks(playerId);
+      } else if (result === 'Exit') {
+        console.log('akuro');
+      }
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      console.log('by pressing ESC');
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      console.log('by clicking on a backdrop');
+      return 'by clicking on a backdrop';
+    } else if (reason === 'Cross click') {
+      console.log('Cross click');
+      return `with: ${reason}`;
+    } else {
+      console.log(`with: ${reason}`);
+      return `with: ${reason}`;
+    }
   }
   deletePlayer(playerId: number) {
 
@@ -47,5 +83,17 @@ export class PlayerListComponent implements OnInit {
     }, error => {
       console.log(error.message);
     });
+  }
+
+  deletePlayerWithRanks(playerId: number) {
+
+    this.playerService.deletePlayerWithRanks(playerId).subscribe(() => {
+      this.getAllPayers();
+      this.toastr.success('Player Deleted');
+    },
+      error => {
+        console.log(error.message);
+        this.toastr.error('Error!', error.message);
+      });
   }
 }

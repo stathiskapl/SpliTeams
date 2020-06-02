@@ -10,6 +10,7 @@ namespace SplitTeam.Repositories
     public interface IPlayerRankRepository
     {
         Task<PlayerRank> AddNewPlayerRank(PlayerRankCreateDTO playerRankCreateDto);
+        Task<bool> DeletePlayerRank(int playerRankId);
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
         Task<List<PlayerRank>> GetAll();
         Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO);
@@ -40,6 +41,14 @@ namespace SplitTeam.Repositories
             await _context.PlayerRanks.AddAsync(playerRank);
             await _context.SaveChangesAsync();
             return playerRank;
+        }
+
+        public async Task<bool> DeletePlayerRank(int playerRankId)
+        {
+            var playerRank = await _context.PlayerRanks.FirstOrDefaultAsync(pr => pr.Id == playerRankId);
+            var playerRankDeleted = _context.Remove(playerRank);
+            return playerRankDeleted == null ? false : true;
+
         }
 
         public async Task<List<PlayerRank>> GetAll()

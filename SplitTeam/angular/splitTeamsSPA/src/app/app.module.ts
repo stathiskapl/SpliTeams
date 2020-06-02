@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 import { SidebarModule } from 'ng-sidebar';
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { RankingsListComponent } from './rankings-list/rankings-list.component';
       CommonModule,
       ToastrModule.forRoot(),
       ReactiveFormsModule,
+      NgbModule,
       SidebarModule.forRoot(),
       AppRoutingModule,
       FormsModule,

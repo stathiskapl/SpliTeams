@@ -4,6 +4,7 @@ import { PlayerService } from '../Services/player.service';
 import { ToastrService } from 'ngx-toastr';
 import { RankingService } from '../Services/ranking.service';
 import { Ranking } from '../_modules/rankings';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { RankingForUpdateDto } from '../_modules/rankingForUpdateDto';
 import { RankingsDTO } from '../_modules/rankingsDto';
 
@@ -13,15 +14,22 @@ import { RankingsDTO } from '../_modules/rankingsDto';
   styleUrls: ['./rankings-list.component.css']
 })
 export class RankingsListComponent implements OnInit {
+  closeResult: string;
+  modalOptions: NgbModalOptions;
+  avgRank: number;
   players: Player[];
   rankingForPlayer: Ranking;
   rankingDto: RankingsDTO = { playerId: 0, skillId: 0, rank: 0 };
   rankingsForPlayer: Ranking[];
-  constructor(private playerService: PlayerService, private toastr: ToastrService, private playerRankService: RankingService) { }
+  constructor(private playerService: PlayerService, private toastr: ToastrService, private playerRankService: RankingService) {
+    this.modalOptions = {
+      backdrop: 'static',
+      backdropClass: 'customBackdrop'
+    };
+  }
 
   ngOnInit() {
     this.getAllPayers();
-    //this.getAllRankingsForPlayer(1053);
   }
   getAllPayers() {
     this.playerService.getAllPayers().subscribe((data: Player[]) => {
@@ -34,9 +42,18 @@ export class RankingsListComponent implements OnInit {
   showRankings(playerId: number) {
     this.getAllRankingsForPlayer(playerId);
   }
+  getavgRankForPlayer() {
+    console.log(this.rankingsForPlayer);
+    let sum = 0;
+    this.rankingsForPlayer.forEach(list => {
+      sum += list.rank;
+    });
+    this.avgRank = sum / this.rankingsForPlayer.length;
+  }
   getAllRankingsForPlayer(playerId: number) {
     this.playerRankService.getAllRankingsForPlayer(playerId).subscribe((data: Ranking[]) => {
       this.rankingsForPlayer = data;
+      this.getavgRankForPlayer();
     }, error => {
       this.toastr.error(error.message);
     });
@@ -54,13 +71,5 @@ export class RankingsListComponent implements OnInit {
       this.toastr.error(error.message);
     });
   }
-  // updateRankForPlayer() {
-
-  //   this.playerRankService.updateRankingForPlayer(playerRankForPlayer).subscribe((data: Ranking) => {
-  //     this.rankingForPlayer = data;
-  //   }, error => {
-  //     this.toastr.error(error.message);
-  //   });
-  // }
 
 }
