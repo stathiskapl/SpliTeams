@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Ranking } from '../_modules/rankings';
+import { RankingForUpdateDto } from '../_modules/rankingForUpdateDto';
+import { RankingsDTO } from '../_modules/rankingsDto';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +22,8 @@ export class RankingService {
   }
   getAllRankingsForPlayer(playerId: number): Observable<Ranking[]> {
     return this.http.get<Ranking[]>(this.baseUrl + 'PlayerRank/GetAllForPlayer/' + playerId);
+  }
+  updateRankingForPlayer(rankId: number,playerRankToUpdate: RankingsDTO): Observable<Ranking>{
+    return this.http.put<Ranking>(this.baseUrl + 'PlayerRank/Update/' + rankId, playerRankToUpdate);
   }
 }

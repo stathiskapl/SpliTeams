@@ -66,5 +66,18 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [HttpPut("Update/{rankId}")]
+        public async Task<IActionResult> Update(int rankId,[FromBody] PlayerRankCreateDTO playerRankCreateDTO)
+        {
+            try
+            {
+                var playerRanks = await _playerRankService.UpdatePlayerRank(rankId,playerRankCreateDTO);
+                return Ok(playerRanks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex);
+            }
+        }
     }
 }

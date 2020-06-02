@@ -10,6 +10,7 @@ namespace SplitTeam.Services
     public interface IPlayerRankService
     {
         Task<PlayerRank> AddPlayerRank(PlayerRankCreateDTO playerRankCreateDto);
+        Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO);
         Task<List<PlayerRankCreateDTO>> AddPlayerRankWhenPlayerCreated(int playerId);
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
         Task<List<PlayerRank>> GetAll();
@@ -68,6 +69,11 @@ namespace SplitTeam.Services
         public async Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId)
         {
             return await _repository.GetAllPlayerRanksForPlayer(playerId);
+        }
+
+        public async Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO)
+        {
+            return await _repository.UpdatePlayerRank(rankId,playerRankCreateDTO);
         }
     }
 }

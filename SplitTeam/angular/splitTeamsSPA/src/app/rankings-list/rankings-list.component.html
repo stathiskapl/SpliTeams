@@ -4,11 +4,7 @@
       <option disabled="true" selected="true" class="form-control">
         Choose A Player
       </option>
-      <option
-        *ngFor="let player of players"
-        [value]="player?.id"
-        class="form-control"
-      >
+      <option *ngFor="let player of players" [value]="player?.id" class="form-control">
         {{ player?.name }}
       </option>
     </select>
@@ -20,6 +16,7 @@
         <th style="width: 25%;">Id</th>
         <th style="width: 25%;">SkillName</th>
         <th style="width: 25%;">Rank</th>
+        <th style="width: 25%;">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -27,6 +24,9 @@
         <th scope="row" style="width: 25%;">{{ ranking?.id }}</th>
         <td style="width: 25%;">{{ ranking?.skill.name }}</td>
         <td style="width: 25%;">{{ ranking?.rank }}</td>
+        <td style="width: 25%;"><button class="btn btn-info btn-sm" (click)="updateRankForPlayer(ranking.id,10,ranking.player.id)">
+            E
+          </button></td>
       </tr>
     </tbody>
   </table>
