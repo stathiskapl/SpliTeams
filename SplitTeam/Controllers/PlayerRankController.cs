@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SplitTeam.Model;
 using SplitTeam.Services;
+using Microsoft.Extensions.Logging;
 
 namespace SplitTeam.Controllers
 {
@@ -12,10 +13,12 @@ namespace SplitTeam.Controllers
     [ApiController]
     public class PlayerRankController : ControllerBase
     {
+        private readonly ILogger<PlayerRankController> _log;
         private readonly IPlayerRankService _playerRankService;
 
-        public PlayerRankController(IPlayerRankService playerRankService)
+        public PlayerRankController(IPlayerRankService playerRankService, ILogger<PlayerRankController> log)
         {
+            _log = log;
             _playerRankService = playerRankService;
         }
         [HttpPost("Create")]
@@ -24,6 +27,7 @@ namespace SplitTeam.Controllers
             try
             {
                 var playerRankSaved = await _playerRankService.AddPlayerRank(playerRankCreateDto);
+                _log.LogInformation($"Returning new playerRank with id {playerRankSaved.Id}");
                 if (playerRankSaved != null)
                 {
                     return Ok(playerRankSaved);
@@ -36,6 +40,7 @@ namespace SplitTeam.Controllers
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -46,10 +51,12 @@ namespace SplitTeam.Controllers
             try
             {
                 var players = await _playerRankService.GetAllPlayerRanksForPlayer(playerId);
+                _log.LogInformation($"Returning {players.Count} playerRanks for player with id {playerId}");
                 return Ok(players);
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -59,10 +66,12 @@ namespace SplitTeam.Controllers
             try
             {
                 var players = await _playerRankService.GetAll();
+                _log.LogInformation($"Returning {players.Count} playerRanks");
                 return Ok(players);
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -72,10 +81,12 @@ namespace SplitTeam.Controllers
             try
             {
                 var playerRanks = await _playerRankService.UpdatePlayerRank(rankId,playerRankCreateDTO);
+                _log.LogInformation($"Updating playerRank with id : {playerRanks.Id}");
                 return Ok(playerRanks);
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }

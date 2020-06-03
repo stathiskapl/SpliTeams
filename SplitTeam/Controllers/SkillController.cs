@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SplitTeam.Model;
 using SplitTeam.Services;
+using Microsoft.Extensions.Logging;
 
 namespace SplitTeam.Controllers
 {
@@ -13,9 +14,10 @@ namespace SplitTeam.Controllers
     public class SkillController : ControllerBase
     {
         private readonly ISkillService _skillService;
-
-        public SkillController(ISkillService skillService)
+        private readonly ILogger<SkillController> _log;
+        public SkillController(ISkillService skillService, ILogger<SkillController> log)
         {
+            _log = log;
             _skillService = skillService;
         }
         [HttpPost("Create")]
@@ -24,10 +26,12 @@ namespace SplitTeam.Controllers
             try
             {
                 var skillSaved = await _skillService.AddSkill(skill);
+                _log.LogInformation($"Returning new skill with id {skillSaved.Id}");
                 return Ok(skillSaved);
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }
@@ -38,10 +42,12 @@ namespace SplitTeam.Controllers
             try
             {
                 var skills = await _skillService.GetAllSkills();
+                _log.LogInformation($"Returning {skills.Count} skills");
                 return Ok(skills);
             }
             catch (Exception ex)
             {
+                _log.LogError($"Something went wrong: {ex}");
                 return StatusCode(500, ex);
             }
         }

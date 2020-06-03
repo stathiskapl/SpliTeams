@@ -4,19 +4,18 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
 using SplitTeam.Model;
 using SplitTeam.Repositories;
 using SplitTeam.Services;
+using Microsoft.OpenApi.Models;
 
 namespace SplitTeam
 {
@@ -55,7 +54,7 @@ namespace SplitTeam
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -71,6 +70,7 @@ namespace SplitTeam
                 app.UseHsts();
             }
 
+            loggerFactory.AddFile("Logs/tournamentApp-{Date}.txt");
             //app.UseHttpsRedirection();
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
