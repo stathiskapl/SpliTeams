@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SplitTeam.Model
 {
-    [Table("Skills")]
-    public class Skill : BaseEntity
+    [Table("Roles")]
+    public class Role : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

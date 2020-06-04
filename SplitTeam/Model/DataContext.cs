@@ -16,6 +16,8 @@ namespace SplitTeam.Model
 
         public virtual DbSet<Player> Players { get; set; }
         public virtual DbSet<Skill> Skills { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<PlayerRank> PlayerRanks { get; set; }
 
         public override int SaveChanges()

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SplitTeam.Model
 {
     [Table("PlayerRanks")]
-    public class PlayerRank
+    public class PlayerRank : BaseEntity
     {
         public int Id { get; set; }
         [ForeignKey("PlayerId")]

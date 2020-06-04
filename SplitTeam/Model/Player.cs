@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SplitTeam.Model
 {
     [Table("Players")]
-    public class Player
+    public class Player : BaseEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

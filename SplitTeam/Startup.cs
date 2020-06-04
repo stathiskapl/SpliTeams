@@ -16,6 +16,14 @@ using SplitTeam.Model;
 using SplitTeam.Repositories;
 using SplitTeam.Services;
 using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using SplitTeam.Helpers;
+using AutoMapper;
 
 namespace SplitTeam
 {
@@ -32,18 +40,68 @@ namespace SplitTeam
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddDbContext<DataContext>(builder => builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(builder =>
+                builder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().AddJsonOptions(o =>
             {
                 o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.None;
                 o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(o =>
+                {
+                    o.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.None;
+                    o.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                }); 
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AutoMapperProfiles());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Slit Teams Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "Slit Teams Api", Version = "v1"});
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Description = "Please insert JWT with Bearer into field",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
             });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<IRoleService, RoleService>();
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<IPlayerRepository, PlayerRepository>();
             services.AddTransient<ISkillService, SkillService>();
@@ -57,27 +115,39 @@ namespace SplitTeam
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Slit Teams Api");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Slit Teams Api"); });
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
             else
             {
-                app.UseHsts();
+                app.UseExceptionHandler(builder =>
+                {
+                    builder.Run(async context =>
+                    {
+                        context.Response.StatusCode = (int) HttpStatusCode.InternalServerError;
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null)
+                        {
+                            context.Response.AddApllicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
+                //app.UseHsts();
             }
 
-            loggerFactory.AddFile("Logs/tournamentApp-{Date}.txt");
+            loggerFactory.AddFile("Logs/SlitTeams-{Date}.txt");
             //app.UseHttpsRedirection();
             app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
+            app.UseAuthentication();
             app.UseMvc();
-
         }
+    
     }
+    
 }
