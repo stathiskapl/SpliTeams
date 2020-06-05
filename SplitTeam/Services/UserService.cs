@@ -19,6 +19,7 @@ namespace SplitTeam.Services
         Task<User> AddUser(UserToLoginDto user);
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
+        Task<List<User>> GetAll();
         Task<User> GetUserById(int userId);
         string Authenticate(User user);
         Task<User> Login(string username, string password);
@@ -80,6 +81,11 @@ namespace SplitTeam.Services
         public async Task<User> DeleteUser(User user)
         {
             return await _userRepository.DeleteUser(user);
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _userRepository.GetAll();
         }
 
         public async Task<User> GetUserById(int userId)

@@ -30,7 +30,6 @@ namespace SplitTeam.Controllers
         {
             try
             {
-                _log.LogInformation("Trying to create new user");
                 var userToRegister = await _userService.AddUser(user);
                 if (userToRegister == null)
                 {
@@ -56,7 +55,6 @@ namespace SplitTeam.Controllers
         {
             try
             {
-                _log.LogInformation($"Trying to update user with id {user.Id}");
                 await _userService.UpdateUser(user);
                 _log.LogInformation($"Returning updated user with id {user.Id}");
                 return Ok(user);
@@ -73,7 +71,6 @@ namespace SplitTeam.Controllers
         {
             try
             {
-                _log.LogInformation($"Trying to delete user with id {user.Id}");
                 await _userService.DeleteUser(user);
                 _log.LogInformation($"User with id {user} deleted");
                 return Ok(user.Id);
@@ -92,7 +89,6 @@ namespace SplitTeam.Controllers
         {
             try
             {
-                _log.LogInformation($"Trying to get user with id {id}");
                 var user = await _userService.GetUserById(id);
                 _log.LogInformation($"Returning get user with id {id}");
                 return Ok(user);
@@ -103,14 +99,28 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
-
+        [HttpGet("GetAll")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var users = await _userService.GetAll();
+                _log.LogInformation($"Returning all users: {users.Count}");
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
         [HttpPost("Login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login([FromBody] UserToLoginDto user)
         {
             try
             {
-                _log.LogInformation($"Trying to login user with username {user.Username}");
                 var userToLogin = await _userService.Login(user.Username, user.Password);
                 if (userToLogin == null)
                 {

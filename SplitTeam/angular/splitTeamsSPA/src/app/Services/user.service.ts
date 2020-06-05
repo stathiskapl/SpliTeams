@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map } from 'rxjs/operators';
 import { User } from '../_modules/user';
+import { Observable } from 'rxjs';
+import { UserForList } from '../_modules/userForList';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +41,9 @@ export class UserService {
   loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
-
   }
+  getAllUsers(): Observable<UserForList[]>{
+    return this.http.get<UserForList[]>(this.baseUrl + 'User/GetAll');
+  }
+
 }

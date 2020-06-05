@@ -34,16 +34,13 @@ export class RankingsListComponent implements OnInit {
   getAllPayers() {
     this.playerService.getAllPayers().subscribe((data: Player[]) => {
       this.players = data;
-      console.log(this.players);
     }, error => {
-      console.log(error.message);
     });
   }
   showRankings(playerId: number) {
     this.getAllRankingsForPlayer(playerId);
   }
   getavgRankForPlayer() {
-    console.log(this.rankingsForPlayer);
     let sum = 0;
     this.rankingsForPlayer.forEach(list => {
       sum += list.rank;
@@ -60,9 +57,6 @@ export class RankingsListComponent implements OnInit {
   }
 
   updateRankForPlayer(rankId: number, rank: number, playerId: number) {
-    console.log(rankId);
-    console.log(rank);
-    console.log(playerId);
     this.rankingDto.rank = rank;
     this.playerRankService.updateRankingForPlayer(rankId, this.rankingDto).subscribe((data: Ranking) => {
       this.rankingForPlayer = data;

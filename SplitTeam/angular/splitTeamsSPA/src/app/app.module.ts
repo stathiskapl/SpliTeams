@@ -20,6 +20,8 @@ import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { MoreInfoComponent } from './more-info/more-info.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -36,7 +38,9 @@ export function tokenGetter() {
       HomeComponent,
       RegisterComponent,
       HomeComponent,
-      MoreInfoComponent
+      MoreInfoComponent,
+      UserListComponent,
+      UserDetailComponent
    ],
    imports: [
       BrowserModule,

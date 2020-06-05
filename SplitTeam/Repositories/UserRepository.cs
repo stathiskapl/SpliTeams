@@ -14,6 +14,7 @@ namespace SplitTeam.Repositories
         Task<User> UpdateUser(User user);
         Task<User> DeleteUser(User user);
         Task<User> GetUserById(int userId);
+        Task<List<User>> GetAll();
         Task<User> GetUserFromUsernameAndPassword(string username, string password);
         Task<bool> UserExists(string username);
 
@@ -40,6 +41,11 @@ namespace SplitTeam.Repositories
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        public async Task<List<User>> GetAll()
+        {
+            return await _context.Users.Include(u=>u.Role).ToListAsync();
         }
 
         public async Task<User> GetUserById(int userId)

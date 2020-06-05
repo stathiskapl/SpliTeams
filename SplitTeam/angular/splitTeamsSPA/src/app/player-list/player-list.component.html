@@ -1,5 +1,6 @@
 <div class="container mt-4">
-  <div class="row">
+  <h1>List With All Players</h1>
+  <div class="row" *ngIf="role === 'Admin'">
     <div class="col-lg-4 form-group">
       <input
         [(ngModel)]="playerName"
@@ -39,7 +40,7 @@
             (click)="open(mymodal, player.id)"
             [disabled]="role === 'Plain User'"
           >
-            Delete Modal
+            Delete
           </button>
         </td>
       </tr>

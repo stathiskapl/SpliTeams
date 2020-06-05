@@ -11,12 +11,14 @@ import { ToastrService } from 'ngx-toastr';
 export class NavBarComponent implements OnInit {
   model: any = {};
   name: string;
+  role: string;
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService) {
-    this.name = localStorage.getItem('username').toString();
+    this.name = localStorage.getItem('username');
+    this.role = localStorage.getItem('role');
   }
 
   ngOnInit() {
-    this.name = localStorage.getItem('username').toString();
+    this.name = localStorage.getItem('username');
   }
   loggedIn() {
     return this.userService.loggedIn();
@@ -34,6 +36,7 @@ export class NavBarComponent implements OnInit {
     this.userService.login(this.model).subscribe(next => {
       this.router.navigate(['/players']);
       this.name = localStorage.getItem('username').toString();
+      this.role = localStorage.getItem('role');
     }, error => {
       this.toastr.error(error.error);
     });

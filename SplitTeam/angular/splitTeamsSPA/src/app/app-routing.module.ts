@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { RankingsListComponent } from './rankings-list/rankings-list.component';
 import { HomeComponent } from './home/home.component';
 import { MoreInfoComponent } from './more-info/more-info.component';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 const routes: Routes = [
@@ -15,7 +15,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'skills', component: SkillListComponent },
-  { path: 'rankings', component: RankingsListComponent }
+  { path: 'rankings', component: RankingsListComponent },
+  { path: 'users', component: UserListComponent },
+  { path: 'users/:userId', component: UserDetailComponent },
 ];
 
 @NgModule({

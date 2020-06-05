@@ -8,12 +8,13 @@ import { Skill } from '../_modules/skill';
   styleUrls: ['./skill-list.component.css']
 })
 export class SkillListComponent implements OnInit {
-
+  role: string;
   constructor(private skillService: SkillService) { }
   skillName = '';
 
   skills: Skill[];
   ngOnInit() {
+    this.role = localStorage.getItem('role').toString();
     this.getAllSkills();
   }
   addSkill() {
@@ -24,16 +25,13 @@ export class SkillListComponent implements OnInit {
       this.skillName = '';
     },
       error => {
-        console.log(error.message);
       });
   }
 
   getAllSkills() {
     this.skillService.getAllSkills().subscribe((data: Skill[]) => {
       this.skills = data;
-      console.log(this.skills);
     }, error => {
-      console.log(error.message);
     });
   }
 }
