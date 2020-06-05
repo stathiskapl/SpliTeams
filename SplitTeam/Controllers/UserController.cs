@@ -68,7 +68,7 @@ namespace SplitTeam.Controllers
             }
         }
         [HttpDelete("Delete")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete([FromBody] User user)
         {
             try
@@ -87,7 +87,7 @@ namespace SplitTeam.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetById(int id)
         {
             try
@@ -114,7 +114,7 @@ namespace SplitTeam.Controllers
                 var userToLogin = await _userService.Login(user.Username, user.Password);
                 if (userToLogin == null)
                 {
-                    return Unauthorized();
+                    return BadRequest("Username or Password is wrong");
                 }
 
                 _log.LogInformation($"Returning token {userToLogin.Token} for user with id {userToLogin.Id}");

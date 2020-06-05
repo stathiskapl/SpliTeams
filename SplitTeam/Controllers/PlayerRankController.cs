@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 using SplitTeam.Model;
 using SplitTeam.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SplitTeam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PlayerRankController : ControllerBase
     {
         private readonly ILogger<PlayerRankController> _log;

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../Services/user.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,44 +9,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  // tslint:disable-next-line: variable-name
-  _opened: boolean = false;
-  _modeNum: number = 0;
-  _positionNum: number = 0;
-  _dock: boolean = false;
-  _closeOnClickOutside: boolean = false;
-  _closeOnClickBackdrop: boolean = false;
-  _showBackdrop: boolean = false;
-  _animate: boolean = true;
-  _trapFocus: boolean = true;
-  _autoFocus: boolean = true;
-  _keyClose: boolean = false;
-  _autoCollapseHeight: number = null;
-  _autoCollapseWidth: number = null;
-
-  _MODES: Array<string> = ['over', 'push', 'slide'];
-  _POSITIONS: Array<string> = ['left', 'right', 'top', 'bottom'];
-
-  _toggleSidebar() {
-    this._opened = !this._opened;
+  model: any = {};
+  name: string;
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) {
+    this.name = localStorage.getItem('username').toString();
   }
-  constructor() { }
 
   ngOnInit() {
+    this.name = localStorage.getItem('username').toString();
   }
-  _toggleOpened(): void {
-    this._opened = !this._opened;
+  loggedIn() {
+    return this.userService.loggedIn();
   }
-
-  _toggleMode(): void {
-    this._modeNum++;
-
-    if (this._modeNum === this._MODES.length) {
-      this._modeNum = 0;
-    }
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('role');
+    this.userService.decodedToken = null;
+    this.userService.currentUer = null;
+    this.router.navigate(['/home']);
   }
-  _onBackdropClicked(): void {
-    console.info('Backdrop clicked');
+  login() {
+    this.userService.login(this.model).subscribe(next => {
+      this.router.navigate(['/players']);
+      this.name = localStorage.getItem('username').toString();
+    }, error => {
+      this.toastr.error(error.error);
+    });
   }
 
 }

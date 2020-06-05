@@ -5,11 +5,14 @@ import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { RankingsListComponent } from './rankings-list/rankings-list.component';
+import { HomeComponent } from './home/home.component';
+import { MoreInfoComponent } from './more-info/more-info.component';
 
 
 const routes: Routes = [
   { path: '', component: PlayerListComponent },
-  { path: 'home', component: NavBarComponent },
+  { path: 'moreinfo', component: MoreInfoComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'players', component: PlayerListComponent },
   { path: 'skills', component: SkillListComponent },
   { path: 'rankings', component: RankingsListComponent }

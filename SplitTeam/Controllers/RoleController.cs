@@ -6,11 +6,13 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using SplitTeam.Model;
 using SplitTeam.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SplitTeam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class RoleController : ControllerBase
     {
         private readonly IRoleService _service;

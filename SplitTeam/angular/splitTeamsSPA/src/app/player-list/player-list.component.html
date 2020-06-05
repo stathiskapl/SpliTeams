@@ -35,14 +35,9 @@
         <td style="width: 25%;"></td>
         <td style="width: 25%;">
           <button
-            class="btn btn-danger btn-sm"
-            (click)="deletePlayer(player.id)"
-          >
-            X
-          </button>
-          <button
             class="btn btn-danger btn-sm ml-2"
             (click)="open(mymodal, player.id)"
+            [disabled]="role === 'Plain User'"
           >
             Delete Modal
           </button>

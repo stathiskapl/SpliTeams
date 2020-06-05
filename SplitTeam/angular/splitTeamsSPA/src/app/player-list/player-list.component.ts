@@ -3,6 +3,7 @@ import { PlayerService } from '../Services/player.service';
 import { Player } from '../_modules/player';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModalOptions, ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-player-list',
@@ -10,18 +11,23 @@ import { NgbModalOptions, ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
+  role: string;
   closeResult: string;
   modalOptions: NgbModalOptions;
-  constructor(private playerService: PlayerService, private toastr: ToastrService, private modalService: NgbModal) {
+  constructor(private playerService: PlayerService, private toastr: ToastrService, private modalService: NgbModal, private userService: UserService) {
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
-    }
+    };
+    this.role = localStorage.getItem('role').toString();
+    //this.role = userService.decodedToken.role;
   }
   playerName = '';
 
   players: Player[];
   ngOnInit() {
+    this.role = localStorage.getItem('role').toString();
+    //this.role = this.userService.decodedToken.role;
     this.getAllPayers();
   }
 

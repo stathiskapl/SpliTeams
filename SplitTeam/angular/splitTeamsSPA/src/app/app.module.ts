@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { JwtModule } from '@auth0/angular-jwt';
 import { SidebarModule } from 'ng-sidebar';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -15,6 +16,14 @@ import { PlayerListComponent } from './player-list/player-list.component';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { CommonModule } from '@angular/common';
 import { RankingsListComponent } from './rankings-list/rankings-list.component';
+import { environment } from 'src/environments/environment';
+import { HomeComponent } from './home/home.component';
+import { RegisterComponent } from './register/register.component';
+import { MoreInfoComponent } from './more-info/more-info.component';
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
@@ -23,7 +32,11 @@ import { RankingsListComponent } from './rankings-list/rankings-list.component';
       PlayerDetailComponent,
       PlayerListComponent,
       SkillListComponent,
-      RankingsListComponent
+      RankingsListComponent,
+      HomeComponent,
+      RegisterComponent,
+      HomeComponent,
+      MoreInfoComponent
    ],
    imports: [
       BrowserModule,
@@ -35,7 +48,14 @@ import { RankingsListComponent } from './rankings-list/rankings-list.component';
       SidebarModule.forRoot(),
       AppRoutingModule,
       FormsModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      JwtModule.forRoot({
+         config: {
+            tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/user/Login', 'localhost:5000/api/user/Create']
+         }
+      })
    ],
    providers: [
       PlayerService
@@ -44,4 +64,6 @@ import { RankingsListComponent } from './rankings-list/rankings-list.component';
       AppComponent
    ]
 })
-export class AppModule { }
+export class AppModule {
+   baseUrl = environment.apiUrl;
+}

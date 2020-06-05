@@ -6,11 +6,13 @@ using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 using SplitTeam.Model;
 using SplitTeam.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SplitTeam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PlayerController : ControllerBase
     {
         private readonly IPlayerService _playerService;
@@ -21,6 +23,7 @@ namespace SplitTeam.Controllers
             _log = log;
             _playerService = playerService;
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
         public async Task<ActionResult<Player>> Create([FromBody] Player player)
         {
@@ -36,6 +39,7 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -51,6 +55,7 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [Authorize(Roles = "Admin")]
         [HttpDelete("DeleteWithRanks/{id}")]
         public async Task<IActionResult> DeleteWithRanks(int id)
         {
