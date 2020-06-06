@@ -1,3 +1,35 @@
-<p>
-  user-detail works!
-</p>
+<div class="container mt-4">
+  <h1>Edit User With Id : {{ user?.id }}</h1>
+  <table class="table table-striped table-bordered mt-4">
+    <tbody>
+      <tr>
+        <th>Id</th>
+        <td>{{ user?.id }}</td>
+      </tr>
+      <tr>
+        <th>UserName</th>
+        <td>{{ user?.userName }}</td>
+      </tr>
+      <tr>
+        <th>Role</th>
+        <td>
+          <select class="form-control" [(ngModel)]="userRole">
+            <option
+              *ngFor="let role of roles"
+              [value]="role?.name"
+              class="form-control"
+            >
+              {{ role?.name }}
+            </option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" type="button" [routerLink]="['/users']">
+    Back To Users
+  </button>
+  <button class="btn btn-success ml-2" type="button" (click)="updateUser()">
+    Save User
+  </button>
+</div>

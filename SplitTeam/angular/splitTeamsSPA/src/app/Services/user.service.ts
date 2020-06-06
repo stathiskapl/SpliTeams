@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { User } from '../_modules/user';
 import { Observable } from 'rxjs';
 import { UserForList } from '../_modules/userForList';
+import { UserForDetail } from '../_modules/userForDetail';
+import { Role } from '../_modules/role';
 
 @Injectable({
   providedIn: 'root'
@@ -42,8 +44,16 @@ export class UserService {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
-  getAllUsers(): Observable<UserForList[]>{
+  getAllUsers(): Observable<UserForList[]> {
     return this.http.get<UserForList[]>(this.baseUrl + 'User/GetAll');
   }
-
+  updateUser(user: UserForDetail): Observable<UserForDetail> {
+    return this.http.put<UserForDetail>(this.baseUrl + 'User/Update', user);
+  }
+  getUserByUserId(userId: number): Observable<UserForDetail> {
+    return this.http.get<UserForDetail>(this.baseUrl + 'User/GetById/' + userId);
+  }
+  getAllRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(this.baseUrl + 'Role/GetAll');
+  }
 }

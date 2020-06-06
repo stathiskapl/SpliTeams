@@ -14,7 +14,6 @@ import { RankingsDTO } from '../_modules/rankingsDto';
   styleUrls: ['./rankings-list.component.css']
 })
 export class RankingsListComponent implements OnInit {
-  closeResult: string;
   modalOptions: NgbModalOptions;
   avgRank: number;
   players: Player[];
