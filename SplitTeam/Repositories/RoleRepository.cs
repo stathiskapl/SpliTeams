@@ -39,7 +39,7 @@ namespace SplitTeam.Repositories
 
         public async Task<Role> GetDefaultRole()
         {
-            return await _context.Roles.FirstOrDefaultAsync(r => r.Id == 1);
+            return await _context.Roles.FirstOrDefaultAsync(r => r.Name == "Plain User");
         }
 
         public int GetDefaultRoleId()

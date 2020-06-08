@@ -219,3 +219,252 @@ FROM [Roles] AS [r]" (0723d8ff)
 2020-06-08T17:40:34.1543439+03:00 0HM0BN7ILOO21:00000001 [INF] Request finished in 3.0405ms 404  (791a596a)
 2020-06-08T17:40:34.1565350+03:00 0HM0BN7ILOO22:00000001 [INF] Request finished in 3.7132ms 404  (791a596a)
 2020-06-08T17:40:34.2579764+03:00 0HM0BN7ILOO1T:00000002 [INF] Request finished in 303.8818ms 200 application/json;charset=utf-8 (791a596a)
+2020-06-08T17:48:26.4607403+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:48:26.7085756+03:00  [INF] Executed DbCommand ("61"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:48:26.8622805+03:00  [INF] Executed DbCommand ("16"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:48:26.8781019+03:00  [INF] Executed DbCommand ("11"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:48:26.8914487+03:00  [INF] Executed DbCommand ("11"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:48:28.8834717+03:00 0HM0BNC0C2V72:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger   (ca22a1cb)
+2020-06-08T17:48:28.9348573+03:00 0HM0BNC0C2V72:00000001 [INF] Request finished in 47.9729ms 301  (791a596a)
+2020-06-08T17:48:28.9418565+03:00 0HM0BNC0C2V72:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html   (ca22a1cb)
+2020-06-08T17:48:29.0509653+03:00 0HM0BNC0C2V72:00000002 [INF] Request finished in 109.8902ms 200 text/html;charset=utf-8 (791a596a)
+2020-06-08T17:48:29.0685549+03:00 0HM0BNC0C2V72:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css   (ca22a1cb)
+2020-06-08T17:48:29.0699166+03:00 0HM0BNC0C2V73:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js   (ca22a1cb)
+2020-06-08T17:48:29.0705263+03:00 0HM0BNC0C2V74:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js   (ca22a1cb)
+2020-06-08T17:48:29.1328296+03:00 0HM0BNC0C2V72:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:48:29.1328296+03:00 0HM0BNC0C2V74:00000001 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:48:29.1337687+03:00 0HM0BNC0C2V73:00000001 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:48:29.1384721+03:00 0HM0BNC0C2V74:00000001 [INF] Request finished in 68.756ms 200 application/javascript (791a596a)
+2020-06-08T17:48:29.1404063+03:00 0HM0BNC0C2V72:00000003 [INF] Request finished in 69.4912ms 200 text/css (791a596a)
+2020-06-08T17:48:29.1412284+03:00 0HM0BNC0C2V73:00000001 [INF] Request finished in 69.3879ms 200 application/javascript (791a596a)
+2020-06-08T17:48:29.3409446+03:00 0HM0BNC0C2V73:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json   (ca22a1cb)
+2020-06-08T17:48:29.4100865+03:00 0HM0BNC0C2V75:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:48:29.4121609+03:00 0HM0BNC0C2V76:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:48:29.5230021+03:00 0HM0BNC0C2V75:00000001 [INF] Request finished in 106.0989ms 404  (791a596a)
+2020-06-08T17:48:29.5230129+03:00 0HM0BNC0C2V76:00000001 [INF] Request finished in 100.889ms 404  (791a596a)
+2020-06-08T17:48:29.5252079+03:00 0HM0BNC0C2V78:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:48:29.5260800+03:00 0HM0BNC0C2V77:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:48:29.5294401+03:00 0HM0BNC0C2V77:00000001 [INF] Request finished in 11.8972ms 404  (791a596a)
+2020-06-08T17:48:29.5304182+03:00 0HM0BNC0C2V78:00000001 [INF] Request finished in 10.378ms 404  (791a596a)
+2020-06-08T17:48:29.6199337+03:00 0HM0BNC0C2V73:00000002 [INF] Request finished in 278.5144ms 200 application/json;charset=utf-8 (791a596a)
+2020-06-08T17:49:40.1945899+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:49:40.4156524+03:00  [INF] Executed DbCommand ("44"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:49:40.5651430+03:00  [INF] Executed DbCommand ("18"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CreatedOnDateTime], [u].[Password], [u].[RoleId], [u].[UpdatedOnDateTime], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[UserName] = N'Admin'" (0723d8ff)
+2020-06-08T17:49:40.5918257+03:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[CreatedOnDateTime], [r].[Name], [r].[UpdatedOnDateTime]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = N'Admin'" (0723d8ff)
+2020-06-08T17:50:17.9760756+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:50:18.1909692+03:00  [INF] Executed DbCommand ("44"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:50:18.3358883+03:00  [INF] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CreatedOnDateTime], [u].[Password], [u].[RoleId], [u].[UpdatedOnDateTime], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[UserName] = N'Admin'" (0723d8ff)
+2020-06-08T17:50:18.3606795+03:00  [INF] Executed DbCommand ("14"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[CreatedOnDateTime], [r].[Name], [r].[UpdatedOnDateTime]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = N'Admin'" (0723d8ff)
+2020-06-08T17:50:18.5446965+03:00  [INF] Executed DbCommand ("144"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (DbType = DateTime2), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime2), @p13='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [Roles] USING (
+VALUES (@p0, @p1, @p2, 0),
+(@p3, @p4, @p5, 1),
+(@p6, @p7, @p8, 2)) AS i ([CreatedOnDateTime], [Name], [UpdatedOnDateTime], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (i.[CreatedOnDateTime], i.[Name], i.[UpdatedOnDateTime])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [Roles] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+INSERT INTO [Users] ([CreatedOnDateTime], [Password], [RoleId], [UpdatedOnDateTime], [UserName])
+VALUES (@p9, @p10, @p11, @p12, @p13);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:50:20.6967287+03:00 0HM0BND1MUL6L:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger   (ca22a1cb)
+2020-06-08T17:50:20.7464339+03:00 0HM0BND1MUL6L:00000001 [INF] Request finished in 51.1205ms 301  (791a596a)
+2020-06-08T17:50:20.7510607+03:00 0HM0BND1MUL6L:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html   (ca22a1cb)
+2020-06-08T17:50:20.8678518+03:00 0HM0BND1MUL6L:00000002 [INF] Request finished in 116.7148ms 200 text/html;charset=utf-8 (791a596a)
+2020-06-08T17:50:20.8919555+03:00 0HM0BND1MUL6L:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css   (ca22a1cb)
+2020-06-08T17:50:20.9038324+03:00 0HM0BND1MUL6M:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js   (ca22a1cb)
+2020-06-08T17:50:20.9046180+03:00 0HM0BND1MUL6N:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js   (ca22a1cb)
+2020-06-08T17:50:20.9680401+03:00 0HM0BND1MUL6L:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:50:20.9680400+03:00 0HM0BND1MUL6N:00000001 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:50:20.9732715+03:00 0HM0BND1MUL6M:00000001 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:50:20.9749771+03:00 0HM0BND1MUL6L:00000003 [INF] Request finished in 85.8696ms 200 text/css (791a596a)
+2020-06-08T17:50:20.9768591+03:00 0HM0BND1MUL6M:00000001 [INF] Request finished in 74.6651ms 200 application/javascript (791a596a)
+2020-06-08T17:50:20.9775779+03:00 0HM0BND1MUL6N:00000001 [INF] Request finished in 70.9557ms 200 application/javascript (791a596a)
+2020-06-08T17:50:21.2063517+03:00 0HM0BND1MUL6M:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json   (ca22a1cb)
+2020-06-08T17:50:21.4433542+03:00 0HM0BND1MUL6M:00000002 [INF] Request finished in 236.9223ms 200 application/json;charset=utf-8 (791a596a)
+2020-06-08T17:50:21.5315382+03:00 0HM0BND1MUL6O:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:50:21.5352886+03:00 0HM0BND1MUL6P:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:50:21.6210552+03:00 0HM0BND1MUL6O:00000001 [INF] Request finished in 90.6807ms 404  (791a596a)
+2020-06-08T17:50:21.6222613+03:00 0HM0BND1MUL6P:00000001 [INF] Request finished in 86.864ms 404  (791a596a)
+2020-06-08T17:50:21.6248061+03:00 0HM0BND1MUL6Q:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:50:21.6294905+03:00 0HM0BND1MUL6R:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:50:21.6294975+03:00 0HM0BND1MUL6Q:00000001 [INF] Request finished in 4.2657ms 404  (791a596a)
+2020-06-08T17:50:21.6320520+03:00 0HM0BND1MUL6R:00000001 [INF] Request finished in 4.4799ms 404  (791a596a)
+2020-06-08T17:51:09.8729415+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:51:10.1178421+03:00  [INF] Executed DbCommand ("52"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:51:10.2608078+03:00  [INF] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CreatedOnDateTime], [u].[Password], [u].[RoleId], [u].[UpdatedOnDateTime], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[UserName] = N'Admin'" (0723d8ff)
+2020-06-08T17:51:10.2842849+03:00  [INF] Executed DbCommand ("13"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[CreatedOnDateTime], [r].[Name], [r].[UpdatedOnDateTime]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = N'Admin'" (0723d8ff)
+2020-06-08T17:51:10.4076282+03:00  [INF] Executed DbCommand ("80"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000), @p5='?' (DbType = DateTime2), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = DateTime2), @p9='?' (DbType = DateTime2), @p10='?' (Size = 4000), @p11='?' (DbType = Int32), @p12='?' (DbType = DateTime2), @p13='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+DECLARE @inserted0 TABLE ([Id] int, [_Position] [int]);
+MERGE [Roles] USING (
+VALUES (@p0, @p1, @p2, 0),
+(@p3, @p4, @p5, 1),
+(@p6, @p7, @p8, 2)) AS i ([CreatedOnDateTime], [Name], [UpdatedOnDateTime], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (i.[CreatedOnDateTime], i.[Name], i.[UpdatedOnDateTime])
+OUTPUT INSERTED.[Id], i._Position
+INTO @inserted0;
+
+SELECT [t].[Id] FROM [Roles] t
+INNER JOIN @inserted0 i ON ([t].[Id] = [i].[Id])
+ORDER BY [i].[_Position];
+
+INSERT INTO [Users] ([CreatedOnDateTime], [Password], [RoleId], [UpdatedOnDateTime], [UserName])
+VALUES (@p9, @p10, @p11, @p12, @p13);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:51:12.6029813+03:00 0HM0BNDH5EBSG:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger   (ca22a1cb)
+2020-06-08T17:51:12.6938316+03:00 0HM0BNDH5EBSG:00000001 [INF] Request finished in 88.9095ms 301  (791a596a)
+2020-06-08T17:51:12.7010064+03:00 0HM0BNDH5EBSG:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html   (ca22a1cb)
+2020-06-08T17:51:12.8544188+03:00 0HM0BNDH5EBSG:00000002 [INF] Request finished in 154.0793ms 200 text/html;charset=utf-8 (791a596a)
+2020-06-08T17:51:12.8785714+03:00 0HM0BNDH5EBSG:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css   (ca22a1cb)
+2020-06-08T17:51:12.8796801+03:00 0HM0BNDH5EBSH:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js   (ca22a1cb)
+2020-06-08T17:51:12.8857318+03:00 0HM0BNDH5EBSI:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js   (ca22a1cb)
+2020-06-08T17:51:12.9393338+03:00 0HM0BNDH5EBSI:00000001 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:51:12.9393375+03:00 0HM0BNDH5EBSG:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:51:12.9446021+03:00 0HM0BNDH5EBSH:00000001 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:51:12.9474601+03:00 0HM0BNDH5EBSI:00000001 [INF] Request finished in 61.6142ms 200 application/javascript (791a596a)
+2020-06-08T17:51:12.9494040+03:00 0HM0BNDH5EBSG:00000003 [INF] Request finished in 70.1976ms 200 text/css (791a596a)
+2020-06-08T17:51:12.9505937+03:00 0HM0BNDH5EBSH:00000001 [INF] Request finished in 69.5654ms 200 application/javascript (791a596a)
+2020-06-08T17:51:13.1958836+03:00 0HM0BNDH5EBSJ:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:51:13.4113127+03:00 0HM0BNDH5EBSJ:00000001 [INF] Request finished in 215.4214ms 404  (791a596a)
+2020-06-08T17:51:13.4144097+03:00 0HM0BNDH5EBSK:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:51:13.4200928+03:00 0HM0BNDH5EBSK:00000001 [INF] Request finished in 3.3174ms 404  (791a596a)
+2020-06-08T17:51:13.8213091+03:00 0HM0BNDH5EBSL:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:51:13.8232680+03:00 0HM0BNDH5EBSL:00000001 [INF] Request finished in 1.7517ms 404  (791a596a)
+2020-06-08T17:51:13.8255948+03:00 0HM0BNDH5EBSM:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:51:13.8275566+03:00 0HM0BNDH5EBSM:00000001 [INF] Request finished in 2.0324ms 404  (791a596a)
+2020-06-08T17:51:13.9312079+03:00 0HM0BNDH5EBSH:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json   (ca22a1cb)
+2020-06-08T17:51:14.0621710+03:00 0HM0BNDH5EBSH:00000002 [INF] Request finished in 130.4362ms 200 application/json;charset=utf-8 (791a596a)
+2020-06-08T17:51:44.4294877+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:51:44.6410055+03:00  [INF] Executed DbCommand ("44"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:51:44.7980854+03:00  [INF] Executed DbCommand ("22"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CreatedOnDateTime], [u].[Password], [u].[RoleId], [u].[UpdatedOnDateTime], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[UserName] = N'admin'" (0723d8ff)
+2020-06-08T17:51:49.0040267+03:00  [INF] Executed DbCommand ("15"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[CreatedOnDateTime], [r].[Name], [r].[UpdatedOnDateTime]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = N'Admin'" (0723d8ff)
+2020-06-08T17:52:53.5832241+03:00  [INF] Entity Framework Core "2.1.14-servicing-32113" initialized '"DataContext"' using provider '"Microsoft.EntityFrameworkCore.SqlServer"' with options: "None" (9958f5bb)
+2020-06-08T17:52:53.8031649+03:00  [INF] Executed DbCommand ("45"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT COUNT(*)
+FROM [Roles] AS [r]" (0723d8ff)
+2020-06-08T17:52:53.9558718+03:00  [INF] Executed DbCommand ("16"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:52:53.9716522+03:00  [INF] Executed DbCommand ("11"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:52:53.9847882+03:00  [INF] Executed DbCommand ("11"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Roles] ([CreatedOnDateTime], [Name], [UpdatedOnDateTime])
+VALUES (@p0, @p1, @p2);
+SELECT [Id]
+FROM [Roles]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:52:54.0249432+03:00  [INF] Executed DbCommand ("17"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [u].[Id], [u].[CreatedOnDateTime], [u].[Password], [u].[RoleId], [u].[UpdatedOnDateTime], [u].[UserName]
+FROM [Users] AS [u]
+WHERE [u].[UserName] = N'admin'" (0723d8ff)
+2020-06-08T17:52:54.0854707+03:00  [INF] Executed DbCommand ("49"ms) [Parameters=[""], CommandType='Text', CommandTimeout='30']"
+""SELECT TOP(1) [r].[Id], [r].[CreatedOnDateTime], [r].[Name], [r].[UpdatedOnDateTime]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = N'Admin'" (0723d8ff)
+2020-06-08T17:52:54.1169172+03:00  [INF] Executed DbCommand ("14"ms) [Parameters=["@p0='?' (DbType = DateTime2), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime2), @p4='?' (Size = 4000)"], CommandType='Text', CommandTimeout='30']"
+""SET NOCOUNT ON;
+INSERT INTO [Users] ([CreatedOnDateTime], [Password], [RoleId], [UpdatedOnDateTime], [UserName])
+VALUES (@p0, @p1, @p2, @p3, @p4);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();" (0723d8ff)
+2020-06-08T17:52:55.9242640+03:00 0HM0BNEFV7HM9:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger   (ca22a1cb)
+2020-06-08T17:52:55.9699498+03:00 0HM0BNEFV7HM9:00000001 [INF] Request finished in 47.1457ms 301  (791a596a)
+2020-06-08T17:52:55.9751633+03:00 0HM0BNEFV7HM9:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html   (ca22a1cb)
+2020-06-08T17:52:56.0825583+03:00 0HM0BNEFV7HM9:00000002 [INF] Request finished in 107.3125ms 200 text/html;charset=utf-8 (791a596a)
+2020-06-08T17:52:56.1022893+03:00 0HM0BNEFV7HM9:00000003 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css   (ca22a1cb)
+2020-06-08T17:52:56.1031906+03:00 0HM0BNEFV7HMA:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js   (ca22a1cb)
+2020-06-08T17:52:56.1048790+03:00 0HM0BNEFV7HMB:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js   (ca22a1cb)
+2020-06-08T17:52:56.1735039+03:00 0HM0BNEFV7HMA:00000001 [INF] Sending file. Request path: '"/swagger-ui-bundle.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:52:56.1735255+03:00 0HM0BNEFV7HMB:00000001 [INF] Sending file. Request path: '"/swagger-ui-standalone-preset.js"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:52:56.1739974+03:00 0HM0BNEFV7HM9:00000003 [INF] Sending file. Request path: '"/swagger-ui.css"'. Physical path: '"N/A"' (27b0a520)
+2020-06-08T17:52:56.1792236+03:00 0HM0BNEFV7HM9:00000003 [INF] Request finished in 75.7738ms 200 text/css (791a596a)
+2020-06-08T17:52:56.1800067+03:00 0HM0BNEFV7HMB:00000001 [INF] Request finished in 72.414ms 200 application/javascript (791a596a)
+2020-06-08T17:52:56.1815691+03:00 0HM0BNEFV7HMA:00000001 [INF] Request finished in 74.9716ms 200 application/javascript (791a596a)
+2020-06-08T17:52:56.4049500+03:00 0HM0BNEFV7HMA:00000002 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json   (ca22a1cb)
+2020-06-08T17:52:56.6649424+03:00 0HM0BNEFV7HMA:00000002 [INF] Request finished in 259.9127ms 200 application/json;charset=utf-8 (791a596a)
+2020-06-08T17:52:56.8642656+03:00 0HM0BNEFV7HMC:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:52:56.8662605+03:00 0HM0BNEFV7HMD:00000001 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:52:56.9529985+03:00 0HM0BNEFV7HMD:00000001 [INF] Request finished in 86.1189ms 404  (791a596a)
+2020-06-08T17:52:56.9536567+03:00 0HM0BNEFV7HMC:00000001 [INF] Request finished in 89.4099ms 404  (791a596a)
+2020-06-08T17:52:56.9561367+03:00 0HM0BNEFV7HME:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-standalone-preset.js.map   (ca22a1cb)
+2020-06-08T17:52:56.9588053+03:00 0HM0BNEFV7HMF:00000001 [INF] Request starting HTTP/1.1 GET http://127.0.0.1:5000/swagger/swagger-ui-bundle.js.map   (ca22a1cb)
+2020-06-08T17:52:56.9615418+03:00 0HM0BNEFV7HME:00000001 [INF] Request finished in 4.9377ms 404  (791a596a)
+2020-06-08T17:52:56.9683036+03:00 0HM0BNEFV7HMF:00000001 [INF] Request finished in 3.2051ms 404  (791a596a)

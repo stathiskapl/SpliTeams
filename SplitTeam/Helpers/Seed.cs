@@ -28,6 +28,22 @@ namespace SplitTeam.Helpers
                     _dataContext.Add(role);
                 }
                 _dataContext.SaveChanges();
+                CreateAdminUser();
+            }
+        }
+
+        public void CreateAdminUser()
+        {
+            var adminUser = new User();
+            var user = _dataContext.Users.FirstOrDefault(u => u.UserName == "admin");
+            if (user == null)
+            {
+                var adminRole = _dataContext.Roles.FirstOrDefault(r => r.Name == "Admin");
+                adminUser.UserName = "admin";
+                adminUser.Password = "admin";
+                adminUser.Role = adminRole;
+                _dataContext.Users.Add(adminUser);
+                _dataContext.SaveChanges();
             }
         }
     }
