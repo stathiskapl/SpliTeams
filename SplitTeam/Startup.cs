@@ -147,6 +147,7 @@ namespace SplitTeam
                 .AllowAnyMethod());
             app.UseAuthentication();
             seeder.SeedRoles();
+            seeder.SeedSkills();
             app.UseMvc();
         }
     

@@ -21,7 +21,7 @@ namespace SplitTeam.Helpers
             var rolesInDbCount = _dataContext.Roles.Count();
             if (rolesInDbCount == 0)
             {
-                var rolesData = System.IO.File.ReadAllText("Helpers/RolesSeedData.json");
+                var rolesData = System.IO.File.ReadAllText("Helpers/SeedJsonData/RolesSeedData.json");
                 var roles = JsonConvert.DeserializeObject<List<Role>>(rolesData);
                 foreach (var role in roles)
                 {
@@ -46,5 +46,21 @@ namespace SplitTeam.Helpers
                 _dataContext.SaveChanges();
             }
         }
+
+        public void SeedSkills()
+        {
+            var skills = _dataContext.Skills.Count();
+            if (skills == 0) 
+            {
+                var skillsData = System.IO.File.ReadAllText("Helpers/SeedJsonData/SkillsSeedData.json");
+                var skillsToSave = JsonConvert.DeserializeObject<List<Skill>>(skillsData);
+                foreach (var skillToSave in skillsToSave)
+                {
+                    _dataContext.Add(skillToSave);
+                }
+                _dataContext.SaveChanges();
+            }
+        }
+
     }
 }
