@@ -10,11 +10,12 @@
         required
       />
     </div>
-    <div class="col-lg-4 form-group">
+    <div class="col-lg-4 form-group" (keyup.enter)="addPlayer()">
       <button
         class="btn btn-success"
         (click)="addPlayer()"
         [disabled]="playerName === ''"
+        type="submit"
       >
         Add Player
       </button>

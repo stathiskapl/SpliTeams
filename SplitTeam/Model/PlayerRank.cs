@@ -14,6 +14,8 @@ namespace SplitTeam.Model
         public virtual Player Player { get; set; }
         [ForeignKey("SkillId")]
         public virtual Skill Skill { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
 
         public int Rank { get; set; }
     }

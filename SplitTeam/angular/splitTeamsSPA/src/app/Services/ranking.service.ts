@@ -26,4 +26,7 @@ export class RankingService {
   updateRankingForPlayer(rankId: number,playerRankToUpdate: RankingsDTO): Observable<Ranking>{
     return this.http.put<Ranking>(this.baseUrl + 'PlayerRank/Update/' + rankId, playerRankToUpdate);
   }
+  getAllRankingsForUser(userId: number): Observable<Ranking[]> {
+    return this.http.get<Ranking[]>(this.baseUrl + 'PlayerRank/GetAllForUser/' + userId);
+  }
 }

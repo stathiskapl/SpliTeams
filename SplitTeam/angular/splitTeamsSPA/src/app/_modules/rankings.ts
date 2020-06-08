@@ -6,4 +6,5 @@ export interface Ranking {
     player: Player;
     skill: Skill;
     rank: number;
+    userId: number;
 }

@@ -12,6 +12,7 @@ namespace SplitTeam.Repositories
         Task<PlayerRank> AddNewPlayerRank(PlayerRankCreateDTO playerRankCreateDto);
         Task<bool> DeletePlayerRank(int playerRankId);
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
+        Task<List<PlayerRank>> GetAllPlayerRanksForUser(int userId);
         Task<List<PlayerRank>> GetAll();
         Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO);
 
@@ -64,6 +65,14 @@ namespace SplitTeam.Repositories
             return await _context.PlayerRanks.Where(x => x.Player.Id == playerId)
                 .Include(x=>x.Skill)
                 .Include(x=>x.Player)
+                .ToListAsync();
+        }
+
+        public async Task<List<PlayerRank>> GetAllPlayerRanksForUser(int userId)
+        {
+            return await _context.PlayerRanks.Where(x => x.User.Id == userId)
+                .Include(x => x.Skill)
+                .Include(x => x.Player)
                 .ToListAsync();
         }
 

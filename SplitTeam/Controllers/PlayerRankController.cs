@@ -62,6 +62,23 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+
+        [HttpGet("GetAllForUser/{userId}")]
+        public async Task<IActionResult> GetAllPlayerRanksForUser(int userId)
+        {
+            try
+            {
+                var playerRanks = await _playerRankService.GetAllPlayerRanksForUser(userId);
+                _log.LogInformation($"Returning {playerRanks.Count} playerRanks for player with id {userId}");
+                return Ok(playerRanks);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {

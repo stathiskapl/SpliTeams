@@ -26,17 +26,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ranking of rankingsForPlayer">
+      <tr *ngFor="let ranking of ranksForPlayer">
         <th scope="row" style="width: 25%;">{{ ranking?.id }}</th>
         <td style="width: 25%;">{{ ranking?.skill.name }}</td>
         <td style="width: 25%;">{{ ranking?.rank }}</td>
         <td style="width: 25%;">
-          <button
-            class="btn btn-info btn-sm"
-            (click)="updateRankForPlayer(ranking.id, 10, ranking.player.id)"
-          >
+          <button class="btn btn-info btn-sm">
             Edit
           </button>
+          <!-- -- (click)="updateRankForPlayer(ranking.id, 10, ranking.player.id)"  -->
         </td>
       </tr>
     </tbody>
