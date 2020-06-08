@@ -61,6 +61,7 @@ namespace SplitTeam
             });
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddTransient<Seed>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Slit Teams Api", Version = "v1"});
@@ -112,7 +113,7 @@ namespace SplitTeam
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Seed seeder)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Slit Teams Api"); });
@@ -145,6 +146,7 @@ namespace SplitTeam
                 .AllowAnyHeader()
                 .AllowAnyMethod());
             app.UseAuthentication();
+            seeder.SeedRoles();
             app.UseMvc();
         }
     

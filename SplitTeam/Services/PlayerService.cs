@@ -29,7 +29,7 @@ namespace SplitTeam.Services
         {
 
             await _repository.AddPlayer(player);
-            await _playerRankService.AddPlayerRankWhenPlayerCreated(player.Id);
+            //await _playerRankService.AddPlayerRankWhenPlayerCreated(player.Id);
             return player;
         }
 
