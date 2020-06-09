@@ -10,12 +10,14 @@ namespace SplitTeam.Repositories
     public interface IPlayerRankRepository
     {
         Task<PlayerRank> AddNewPlayerRank(PlayerRankCreateDTO playerRankCreateDto);
+        Task<PlayerRank> SavePlayerRank(PlayerRank playerRank);
         Task<bool> DeletePlayerRank(int playerRankId);
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
         Task<List<PlayerRank>> GetAllPlayerRanksForUser(int userId);
         Task<List<PlayerRank>> GetAll();
         Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO);
-
+        Task<PlayerRank> UpdatePlayerRankToSave(PlayerRankSaveDTO playerRankCreateDTO);
+        Task<bool> SaveChangesAsync();
 
     }
 
@@ -76,12 +78,31 @@ namespace SplitTeam.Repositories
                 .ToListAsync();
         }
 
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<PlayerRank> SavePlayerRank(PlayerRank playerRank)
+        {
+            var a = await _context.PlayerRanks.AddAsync(playerRank);
+            return a.Entity;
+        }
+
         public async Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO)
         {
             var playerRank = await _context.PlayerRanks.FirstOrDefaultAsync(pr=>pr.Id == rankId);
             playerRank.Rank = playerRankCreateDTO.Rank;
             var playerRankUpdated = _context.Update(playerRank);
             await _context.SaveChangesAsync();
+            return playerRankUpdated.Entity;
+        }
+
+        public async Task<PlayerRank> UpdatePlayerRankToSave(PlayerRankSaveDTO playerRankCreateDTO)
+        {
+            var playerRank = await _context.PlayerRanks.FirstOrDefaultAsync(pr => pr.Id == playerRankCreateDTO.Id);
+            playerRank.Rank = playerRankCreateDTO.Rank;
+            var playerRankUpdated = _context.Update(playerRank);
             return playerRankUpdated.Entity;
         }
     }

@@ -21,6 +21,7 @@ export class RankingsListComponent implements OnInit {
   userId: number;
   players: Player[];
   skills: Skill[];
+  contentEditable = false;
   rankingForPlayer: Ranking;
   rankingDto: RankingsDTO = { playerId: 0, skillId: 0, rank: 0, userId: 0 };
   rankingsForPlayer: Ranking[];
@@ -109,5 +110,12 @@ export class RankingsListComponent implements OnInit {
   // constructRankViewModel() {
 
   // }
-
+  toggleEditable(event) {
+    if (event.target.checked) {
+      this.contentEditable = true;
+    }
+    if (!event.target.checked) {
+      this.contentEditable = false;
+    }
+  }
 }

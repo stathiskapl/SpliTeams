@@ -11,6 +11,7 @@ namespace SplitTeam.Repositories
     {
         Task<Skill> AddSkill(Skill skill);
         Task<List<Skill>> GetAllSkills();
+        Task<Skill> GetSkillById(int skillId);
     }
 
     public class SkillRepository : ISkillRepository
@@ -32,6 +33,11 @@ namespace SplitTeam.Repositories
         public async Task<List<Skill>> GetAllSkills()
         {
             return await _context.Skills.ToListAsync();
+        }
+
+        public async Task<Skill> GetSkillById(int skillId)
+        {
+            return await _context.Skills.FirstOrDefaultAsync(s=>s.Id == skillId);
         }
     }
 }

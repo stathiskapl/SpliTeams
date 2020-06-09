@@ -15,17 +15,23 @@ namespace SplitTeam.Services
         Task<List<PlayerRank>> GetAllPlayerRanksForPlayer(int playerId);
         Task<List<PlayerRank>> GetAllPlayerRanksForUser(int userId);
         Task<List<PlayerRank>> GetAll();
+        Task<bool> SavePlayerRanks(List<PlayerRankSaveDTO> playerRanksToCreateDto);
     }
 
     public class PlayerRankService : IPlayerRankService
     {
         private readonly IPlayerRankRepository _repository;
+        private readonly IUserRepository _userRepository;
+        private readonly IPlayerRepository _playerRepository;
         private readonly ISkillRepository _skillRepository;
 
-        public PlayerRankService(IPlayerRankRepository repository,ISkillRepository skillRepository)
+        public PlayerRankService(IPlayerRankRepository repository,ISkillRepository skillRepository, 
+                                IUserRepository userRepository,IPlayerRepository playerRepository)
         {
             _repository = repository;
+            _userRepository = userRepository;
             _skillRepository = skillRepository;
+            _playerRepository = playerRepository;
         }
         public async Task<PlayerRank> AddPlayerRank(PlayerRankCreateDTO playerRankCreateDto)
         {
@@ -76,6 +82,37 @@ namespace SplitTeam.Services
         public async Task<List<PlayerRank>> GetAllPlayerRanksForUser(int userId)
         {
             return await _repository.GetAllPlayerRanksForUser(userId);
+        }
+
+        public async Task<bool> SavePlayerRanks(List<PlayerRankSaveDTO> playerRanksToSaveDto)
+        {
+            //same player,user
+            var user = await _userRepository.GetUserById(playerRanksToSaveDto[0].UserId);
+            var player = await _playerRepository.GetPlayerById(playerRanksToSaveDto[0].PlayerId);
+            foreach (var playerRank in playerRanksToSaveDto)
+            {
+                //Create Mode
+                if (playerRank.Id == 0)
+                {
+                    //different skill
+                    var skill = await _skillRepository.GetSkillById(playerRank.SkillId);
+                    PlayerRank prank = new PlayerRank()
+                    {
+                        Player = player,
+                        Rank = playerRank.Rank,
+                        Skill = skill,
+                        User = user
+                    };
+                    await _repository.SavePlayerRank(prank);
+                }
+                //Update Mode
+                else
+                {
+                    await _repository.UpdatePlayerRankToSave(playerRank);
+                }
+            }
+            //Saving one time in the end
+            return await _repository.SaveChangesAsync();
         }
 
         public async Task<PlayerRank> UpdatePlayerRank(int rankId,PlayerRankCreateDTO playerRankCreateDTO)

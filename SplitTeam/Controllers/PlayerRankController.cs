@@ -109,5 +109,20 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [HttpPut("SavePlayerRanks")]
+        public async Task<IActionResult> SavePlayerRanks([FromBody] List<PlayerRankSaveDTO> playerRanksSaveDTO)
+        {
+            try
+            {
+                var playerRanks = await _playerRankService.SavePlayerRanks(playerRanksSaveDTO);
+                _log.LogInformation($"Success Saving : {playerRanks} ");
+                return Ok(playerRanks);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
