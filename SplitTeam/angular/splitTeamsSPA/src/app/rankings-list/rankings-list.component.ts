@@ -9,6 +9,7 @@ import { RankingForUpdateDto } from '../_modules/rankingForUpdateDto';
 import { RankingsDTO } from '../_modules/rankingsDto';
 import { SkillService } from '../Services/skill.service';
 import { Skill } from '../_modules/skill';
+import { RankingToSave } from '../_modules/rankingToSave';
 
 @Component({
   selector: 'app-rankings-list',
@@ -24,10 +25,17 @@ export class RankingsListComponent implements OnInit {
   contentEditable = false;
   rankingForPlayer: Ranking;
   rankingDto: RankingsDTO = { playerId: 0, skillId: 0, rank: 0, userId: 0 };
+  rankingToSaveDto: RankingToSave = { id: 0, playerId: 0, skillId: 0, userId: 0, rank: 0 };
+  rankingsToSave: RankingToSave[] = [{ id: 0, playerId: 0, skillId: 0, userId: 0, rank: 0 }];
   rankingsForPlayer: Ranking[];
   rankingsForUser: Ranking[];
   ranksForPlayer: Ranking[];
-  constructor(private playerService: PlayerService, private toastr: ToastrService, private playerRankService: RankingService, private skillService: SkillService) {
+  isChecked: boolean;
+  constructor(
+    private playerService: PlayerService,
+    private toastr: ToastrService,
+    private playerRankService: RankingService,
+    private skillService: SkillService) {
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
@@ -51,10 +59,13 @@ export class RankingsListComponent implements OnInit {
   }
   getavgRankForPlayer() {
     let sum = 0;
-    this.ranksForPlayer.forEach(list => {
-      sum += list.rank;
-    });
-    this.avgRank = sum / this.ranksForPlayer.length;
+    if (this.ranksForPlayer) {
+      this.ranksForPlayer.forEach(list => {
+        sum += list.rank;
+      });
+      this.avgRank = sum / this.ranksForPlayer.length;
+    }
+
   }
   getAllRankingsForPlayer(playersId: number, usersId: number) {
 
@@ -88,6 +99,32 @@ export class RankingsListComponent implements OnInit {
       this.toastr.error(error.message);
     });
   }
+  savePlayerRanks() {
+    console.log(this.ranksForPlayer);
+    const playerId = this.ranksForPlayer[0].player.id;
+    const userId = this.ranksForPlayer[0].userId;
+    this.rankingsToSave.length = 0;
+    for (const rank of this.ranksForPlayer) {
+      this.rankingsToSave.push({ id: rank.id, playerId: rank.player.id, rank: rank.rank, userId: rank.userId, skillId: rank.skill.id });
+    }
+    this.playerRankService.savePlayerRanks(this.rankingsToSave).subscribe((isSuccededSaving: boolean) => {
+      if (isSuccededSaving === true) {
+        this.toastr.success('Saved Successfully');
+        this.ngOnInit();
+        this.rankingsToSave.length = 0;
+        this.isChecked = false;
+        this.contentEditable = false;
+      } else {
+        this.toastr.error('error');
+        this.isChecked = false;
+        this.contentEditable = false;
+      }
+    }, error => {
+      this.toastr.error(error.message);
+      this.isChecked = false;
+      this.contentEditable = false;
+    });
+  }
 
   getAllSkills() {
     this.skillService.getAllSkills().subscribe((data: Skill[]) => {
@@ -118,4 +155,8 @@ export class RankingsListComponent implements OnInit {
       this.contentEditable = false;
     }
   }
+  change(event, rank: Ranking) {
+    this.ranksForPlayer.find(rankForPlayer => rankForPlayer.skill.name === rank.skill.name).rank = +event.target.value;
+  }
+
 }

@@ -10,7 +10,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 
 
 const routes: Routes = [
-  { path: '', component: PlayerListComponent },
+  { path: '', component: HomeComponent },
   { path: 'moreinfo', component: MoreInfoComponent },
   { path: 'home', component: HomeComponent },
   { path: 'players', component: PlayerListComponent },

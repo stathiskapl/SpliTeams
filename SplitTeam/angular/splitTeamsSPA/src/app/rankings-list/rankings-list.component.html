@@ -20,6 +20,7 @@
       class="custom-control-input"
       id="customSwitches"
       (change)="toggleEditable($event)"
+      [(ngModel)]="isChecked"
     />
     <label class="custom-control-label" for="customSwitches">Edit Mode</label>
   </div>
@@ -42,6 +43,7 @@
         </td>
         <td style="width: 25%;" *ngIf="contentEditable === true">
           <input
+            (change)="change($event, ranking)"
             type="number"
             class="form-control"
             [value]="ranking?.rank"
@@ -52,7 +54,11 @@
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-success btn-lg mb-4" *ngIf="ranksForPlayer">
+  <button
+    class="btn btn-success btn-lg mb-4"
+    *ngIf="contentEditable === true"
+    (click)="savePlayerRanks()"
+  >
     Save
   </button>
 </div>
