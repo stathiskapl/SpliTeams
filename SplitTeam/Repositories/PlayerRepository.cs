@@ -12,6 +12,7 @@ namespace SplitTeam.Repositories
         Task<Player> AddPlayer(Player player);
         Task<bool> DeletePlayer(int playerId);
         Task<Player> GetPlayerById(int playerId);
+        Task<Player> UpdatePlayer(Player player);
         Task<bool> DeletePlayerWithRanks(int playerId);
         Task<List<Player>> GetAllPlayers();
     }
@@ -62,6 +63,13 @@ namespace SplitTeam.Repositories
         public async Task<Player> GetPlayerById(int playerId)
         {
             return await _context.Players.FirstOrDefaultAsync(p => p.Id == playerId);
+        }
+
+        public async Task<Player> UpdatePlayer(Player player)
+        {
+            _context.Update(player);
+            await _context.SaveChangesAsync();
+            return player;
         }
     }
 }

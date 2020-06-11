@@ -101,8 +101,6 @@ export class RankingsListComponent implements OnInit {
   }
   savePlayerRanks() {
     console.log(this.ranksForPlayer);
-    const playerId = this.ranksForPlayer[0].player.id;
-    const userId = this.ranksForPlayer[0].userId;
     this.rankingsToSave.length = 0;
     for (const rank of this.ranksForPlayer) {
       this.rankingsToSave.push({ id: rank.id, playerId: rank.player.id, rank: rank.rank, userId: rank.userId, skillId: rank.skill.id });

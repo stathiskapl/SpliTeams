@@ -13,6 +13,8 @@ namespace SplitTeam.Services
         Task<bool> DeletePlayer(int playerId);
         Task<bool> DeletePlayerWithRanks(int playerId);
         Task<List<Player>> GetAllPlayers();
+        Task<Player> CalculateAverageRankForPlayer(int playerId);
+        Task<Player> saveAverageRank(int playerId,decimal averageRank);
     }
 
     public class PlayerService : IPlayerService
@@ -33,6 +35,18 @@ namespace SplitTeam.Services
             return player;
         }
 
+        public async Task<Player> CalculateAverageRankForPlayer(int playerId)
+        {
+            var playerRanksForPlayer = await _playerRankService.GetAllPlayerRanksForPlayer(playerId);
+            int sum = 0;
+            foreach (var playerRankForPlayer in playerRanksForPlayer)
+            {
+                sum = sum + playerRankForPlayer.Rank;
+            }
+            var avgRank = decimal.Divide(sum, playerRanksForPlayer.Count);
+            return await saveAverageRank(playerId, avgRank);
+        }
+
         public async Task<bool> DeletePlayer(int playerId)
         {
             return await _repository.DeletePlayer(playerId);
@@ -46,6 +60,13 @@ namespace SplitTeam.Services
         public async Task<List<Player>> GetAllPlayers()
         {
             return await _repository.GetAllPlayers();
+        }
+
+        public async Task<Player> saveAverageRank(int playerId, decimal averageRank)
+        {
+            var playerToUpdate = await _repository.GetPlayerById(playerId);
+            playerToUpdate.AverageRank = averageRank;
+            return await _repository.UpdatePlayer(playerToUpdate);
         }
     }
 }

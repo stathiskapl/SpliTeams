@@ -87,5 +87,22 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [Authorize(Roles = "Super Admin")]
+        [HttpGet("CalculateAverageRankForPlayer/{playerId}")]
+        public async Task<IActionResult> CalculateAverageRankForPlayer(int playerId)
+        {
+            try
+            {
+
+                var averageRank = await _playerService.CalculateAverageRankForPlayer(playerId);
+                _log.LogInformation($"Returning average rank {averageRank} for player with id {playerId}");
+                return Ok(averageRank);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
     }
 }
