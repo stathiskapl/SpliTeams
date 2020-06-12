@@ -109,6 +109,8 @@ namespace SplitTeam
             services.AddTransient<ISkillRepository, SkillRepository>();
             services.AddTransient<IPlayerRankService, PlayerRankService>();
             services.AddTransient<IPlayerRankRepository, PlayerRankRepository>();
+            services.AddTransient<ITeamRepository, TeamRepository>();
+            services.AddTransient<ITeamService, TeamService>();
 
         }
 
