@@ -45,9 +45,9 @@ namespace SplitTeam.Controllers
         {
             try
             {
-                var isok = await _teamService.SplitTeams(playerIds);
-                //_log.LogInformation($"Returning new team with id {teamSaved.Id}");
-                return Ok(isok);
+                var playerTeams = await _teamService.SplitTeams(playerIds);
+                _log.LogInformation($"Returning {playerTeams.Count} playerTeams");
+                return Ok(playerTeams);
             }
             catch (Exception ex)
             {

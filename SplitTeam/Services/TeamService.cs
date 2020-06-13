@@ -11,17 +11,19 @@ namespace SplitTeam.Services
     public interface ITeamService
     {
         Task<Team> AddTeam(Team team);
-        Task<bool> SplitTeams(List<int> playerIds);
+        Task<List<TeamPlayer>> SplitTeams(List<int> playerIds);
     }
 
     public class TeamService : ITeamService
     {
         private readonly ITeamRepository _repository;
         private readonly IPlayerRepository _playerRepository;
-        public TeamService(ITeamRepository repository, IPlayerRepository playerRepository)
+        private readonly IPlayerService _playerService;
+        public TeamService(ITeamRepository repository, IPlayerRepository playerRepository, IPlayerService playerService)
         {
             _repository = repository;
             _playerRepository = playerRepository;
+            _playerService = playerService;
         }
 
         public async Task<Team> AddTeam(Team team)
@@ -29,8 +31,12 @@ namespace SplitTeam.Services
             return await _repository.AddTeam(team);
         }
 
-        public async Task<bool> SplitTeams(List<int> playerIds)
+        public async Task<List<TeamPlayer>> SplitTeams(List<int> playerIds)
         {
+            foreach (var playerId in playerIds)
+            {
+                await _playerService.CalculateAverageRankForPlayer(playerId);
+            }
             var players = new List<Player>();
             decimal sum = 0;
             foreach (var playerId in playerIds)
@@ -43,10 +49,26 @@ namespace SplitTeam.Services
                 }
 
             }
-            var a = CalculateEqualTeams(players);
-            var b = a;
-            return true;
+            //Teams are ok
+            var teamsPlayers = CalculateEqualTeams(players);
+            return await SaveTeamPlayers(teamsPlayers);
         }
+
+        private async Task<List<TeamPlayer>> SaveTeamPlayers(List<TeamPlayerDto> teamsPlayers)
+        {
+            var teamPlayers = new List<TeamPlayer>();
+            foreach (var teamsPlayer in teamsPlayers)
+            {
+                TeamPlayer teamPlayer = new TeamPlayer()
+                {
+                    Player = await _playerRepository.GetPlayerById(teamsPlayer.PlayerId),
+                    Team = await _repository.GetTeamById(teamsPlayer.TeamId)
+                };
+                teamPlayers.Add(teamPlayer);
+            }
+            return await _repository.SaveTeamPlayers(teamPlayers);
+        }
+
         private List<TeamPlayerDto> CalculateEqualTeams(List<Player> players)
         {
             var shuffledPlayers = players.OrderBy(a => Guid.NewGuid()).ToList();
