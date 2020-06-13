@@ -21,6 +21,7 @@ namespace SplitTeam.Model
         public virtual DbSet<PlayerRank> PlayerRanks { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
         public virtual DbSet<TeamPlayer> TeamPlayers { get; set; }
+        public virtual DbSet<Match> Matches { get; set; }
 
         public override int SaveChanges()
         {
