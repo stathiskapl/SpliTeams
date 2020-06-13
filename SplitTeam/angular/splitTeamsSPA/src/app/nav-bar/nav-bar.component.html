@@ -12,17 +12,25 @@
           <li class="nav-item" routerLinkActive="active">
             <a class="nav-link" [routerLink]="['/rankings']">Rankings</a>
           </li>
-          <li class="nav-item" routerLinkActive="active" *ngIf="role === 'Admin'">
+          <li
+            class="nav-item"
+            routerLinkActive="active"
+            *ngIf="role === 'Admin'"
+          >
             <a class="nav-link" [routerLink]="['/users']">Users</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/teams']">Teams</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" [routerLink]="['/matches']">Matches</a>
           </li>
         </ul>
       </div>
     </div>
     <div *ngIf="loggedIn()">
       <span class="mr-1"> </span>
-      <a class="font-weight-bold">
-        Welcome {{ name | titlecase }}
-      </a>
+      <a class="font-weight-bold"> Welcome {{ name | titlecase }} </a>
 
       <button
         class="btn btn-danger my-2 my-sm-0 ml-2"

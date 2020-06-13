@@ -12,10 +12,10 @@ export class SkillService {
 constructor(private http: HttpClient) { }
 baseUrl = environment.apiUrl;
 
-getAllSkills(): Observable<Skill[]> {
-  return this.http.get<Skill[]>(this.baseUrl + 'Skill/GetAll');
-}
-createSkill(skill: Skill): Observable<Skill> {
-  return this.http.post<Skill>(this.baseUrl + 'Skill/Create', skill);
-}
+  getAllSkills(): Observable<Skill[]> {
+    return this.http.get<Skill[]>(this.baseUrl + 'Skill/GetAll');
+  }
+  createSkill(skill: Skill): Observable<Skill> {
+    return this.http.post<Skill>(this.baseUrl + 'Skill/Create', skill);
+  }
 }

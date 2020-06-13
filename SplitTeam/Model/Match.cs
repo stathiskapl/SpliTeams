@@ -16,5 +16,6 @@ namespace SplitTeam.Model
         public virtual Team TeamB { get; set; }
         public int? ScoreTeamA { get; set; }
         public int? ScoreTeamB { get; set; }
+        public string Description { get; set; }
     }
 }

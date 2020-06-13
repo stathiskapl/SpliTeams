@@ -12,8 +12,7 @@ namespace SplitTeam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
-    //[Authorize(Roles = "Admin")]
+    [Authorize]
     public class TeamController : ControllerBase
     {
         private readonly ILogger<TeamController> _log;
@@ -23,7 +22,7 @@ namespace SplitTeam.Controllers
             _log = log;
             _teamService = teamService;
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] Team team)
         {
@@ -39,7 +38,7 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("SplitTeams")]
         public async Task<IActionResult> SplitTeams([FromBody] List<int> playerIds)
         {
@@ -55,5 +54,37 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllTeams()
+        {
+            try
+            {
+                var teams = await _teamService.GetAllTeams();
+                _log.LogInformation($"Returning {teams.Count} teams");
+                return Ok(teams);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+        [AllowAnonymous]
+        [HttpGet("GetAllTeamPlayersForTeamId/{teamId}")]
+        public async Task<IActionResult> GetAllTeamPlayersForTeamId(int teamId)
+        {
+            try
+            {
+                var teams = await _teamService.GetAllTeamPlayersForTeamId(teamId);
+                _log.LogInformation($"Returning {teams.Count} playerTeams");
+                return Ok(teams);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+        
     }
 }

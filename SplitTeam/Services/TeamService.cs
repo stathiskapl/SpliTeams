@@ -12,6 +12,8 @@ namespace SplitTeam.Services
     {
         Task<Team> AddTeam(Team team);
         Task<List<TeamPlayer>> SplitTeams(List<int> playerIds);
+        Task<List<Team>> GetAllTeams();
+        Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId);
     }
 
     public class TeamService : ITeamService
@@ -117,6 +119,16 @@ namespace SplitTeam.Services
             {
                 return listToReturn;
             }
+        }
+
+        public async Task<List<Team>> GetAllTeams()
+        {
+            return await _repository.GetAllTeams();
+        }
+
+        public async Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId)
+        {
+            return await _repository.GetAllTeamPlayersForTeamId(teamId);
         }
     }
 }

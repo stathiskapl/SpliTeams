@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { MoreInfoComponent } from './more-info/more-info.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { MatchListComponent } from './match-list/match-list.component';
 
 
 const routes: Routes = [
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'players', component: PlayerListComponent },
   { path: 'skills', component: SkillListComponent },
   { path: 'rankings', component: RankingsListComponent },
+  { path: 'teams', component: TeamListComponent },
+  { path: 'matches', component: MatchListComponent },
   { path: 'users', component: UserListComponent },
   { path: 'users/:userId', component: UserDetailComponent },
 ];

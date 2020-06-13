@@ -22,6 +22,8 @@ import { RegisterComponent } from './register/register.component';
 import { MoreInfoComponent } from './more-info/more-info.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { MatchListComponent } from './match-list/match-list.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -40,7 +42,10 @@ export function tokenGetter() {
       HomeComponent,
       MoreInfoComponent,
       UserListComponent,
-      UserDetailComponent
+      UserDetailComponent,
+      UserListComponent,
+      TeamListComponent,
+      MatchListComponent
    ],
    imports: [
       BrowserModule,

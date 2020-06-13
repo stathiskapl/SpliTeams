@@ -1,5 +1,5 @@
 ﻿αν θες να κανεις migrations 
-dotnet ef migrations add "matches"
+dotnet ef migrations add "matches description"
 αν θες να κανεις update τη βαση με όλα τα migrations
 dotnet ef database update
 αν θες να διαγραψεις το τελευταιο migration ΧΩΡΙΣ ΟΜΩΣ να εχεις τρέξει update 
