@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SkillService } from '../Services/skill.service';
+import { SkillService } from '../_services/skill.service';
 import { Skill } from '../_modules/skill';
 
 @Component({

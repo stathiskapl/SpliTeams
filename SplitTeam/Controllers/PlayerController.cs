@@ -87,7 +87,7 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
-        [Authorize(Roles = "Super Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpGet("CalculateAverageRankForPlayer/{playerId}")]
         public async Task<IActionResult> CalculateAverageRankForPlayer(int playerId)
         {

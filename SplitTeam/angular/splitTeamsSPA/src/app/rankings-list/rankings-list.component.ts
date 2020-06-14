@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Player } from '../_modules/player';
-import { PlayerService } from '../Services/player.service';
+import { PlayerService } from '../_services/player.service';
 import { ToastrService } from 'ngx-toastr';
-import { RankingService } from '../Services/ranking.service';
+import { RankingService } from '../_services/ranking.service';
 import { Ranking } from '../_modules/rankings';
 import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { RankingForUpdateDto } from '../_modules/rankingForUpdateDto';
 import { RankingsDTO } from '../_modules/rankingsDto';
-import { SkillService } from '../Services/skill.service';
+import { SkillService } from '../_services/skill.service';
 import { Skill } from '../_modules/skill';
 import { RankingToSave } from '../_modules/rankingToSave';
 

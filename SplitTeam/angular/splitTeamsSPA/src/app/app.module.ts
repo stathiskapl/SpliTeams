@@ -10,7 +10,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PlayerService } from './Services/player.service';
+import { PlayerService } from './_services/player.service';
 import { PlayerDetailComponent } from './player-detail/player-detail.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { SkillListComponent } from './skill-list/skill-list.component';

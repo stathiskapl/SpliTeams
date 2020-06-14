@@ -69,7 +69,6 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
-        [AllowAnonymous]
         [HttpGet("GetAllTeamPlayersForTeamId/{teamId}")]
         public async Task<IActionResult> GetAllTeamPlayersForTeamId(int teamId)
         {

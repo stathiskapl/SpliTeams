@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../_modules/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../Services/user.service';
+import { UserService } from '../_services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

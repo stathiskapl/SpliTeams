@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayerService } from '../Services/player.service';
+import { PlayerService } from '../_services/player.service';
 import { Player } from '../_modules/player';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModalOptions, ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserService } from '../Services/user.service';
+import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-player-list',
