@@ -84,6 +84,23 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [Authorize(Roles = "Admin")]
+        [HttpGet("GetAllTeamsWithoutTeamPlayers")]
+        public async Task<IActionResult> GetAllTeamsWithoutTeamPlayers()
+        {
+            try
+            {
+                var teams = await _teamService.GetAllTeamsWithoutTeamPlayers();
+                _log.LogInformation($"Returning {teams.Count} playerTeams");
+                return Ok(teams);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
         
+
     }
 }

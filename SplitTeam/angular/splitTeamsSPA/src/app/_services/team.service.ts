@@ -21,4 +21,7 @@ export class TeamService {
   getAllTeamPlayersForTeamId(teamId: number): Observable<TeamPlayer[]> {
     return this.http.get<TeamPlayer[]>(this.baseUrl + 'Team/GetAllTeamPlayersForTeamId/' + teamId);
   }
+  getAllTeamsWithoutTeamPlayers(): Observable<Team[]> {
+    return this.http.get<Team[]>(this.baseUrl + 'Team/getAllTeamsWithoutTeamPlayers');
+  }
 }

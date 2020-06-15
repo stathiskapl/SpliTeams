@@ -14,6 +14,7 @@ namespace SplitTeam.Services
         Task<List<TeamPlayer>> SplitTeams(List<int> playerIds);
         Task<List<Team>> GetAllTeams();
         Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId);
+        Task<List<Team>> GetAllTeamsWithoutTeamPlayers();
     }
 
     public class TeamService : ITeamService
@@ -129,6 +130,14 @@ namespace SplitTeam.Services
         public async Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId)
         {
             return await _repository.GetAllTeamPlayersForTeamId(teamId);
+        }
+
+        public async Task<List<Team>> GetAllTeamsWithoutTeamPlayers()
+        {
+            var allTeams = await _repository.GetAllTeams();
+            var teamsWithPlayers = await _repository.GetAllTeamPlayers();
+            var idsteamsWithPlayers = teamsWithPlayers.Select(tp => tp.Team).ToList();
+            return allTeams.Where(p => !idsteamsWithPlayers.Any(p2 => p2.Id == p.Id)).ToList();
         }
     }
 }

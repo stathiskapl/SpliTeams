@@ -24,6 +24,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { MatchListComponent } from './match-list/match-list.component';
+import { MatchDetailComponent } from './match-detail/match-detail.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -45,7 +46,8 @@ export function tokenGetter() {
       UserDetailComponent,
       UserListComponent,
       TeamListComponent,
-      MatchListComponent
+      MatchListComponent,
+      MatchDetailComponent
    ],
    imports: [
       BrowserModule,

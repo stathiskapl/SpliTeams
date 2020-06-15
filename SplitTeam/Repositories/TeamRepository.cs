@@ -15,6 +15,7 @@ namespace SplitTeam.Repositories
         Task<List<TeamPlayer>> SaveTeamPlayers(List<TeamPlayer> teamsPlayers);
         Task<List<Team>> GetAllTeams();
         Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId);
+        Task<List<TeamPlayer>> GetAllTeamPlayers();
     }
 
     public class TeamRepository : ITeamRepository
@@ -30,6 +31,11 @@ namespace SplitTeam.Repositories
             await _context.Teams.AddAsync(team);
             await _context.SaveChangesAsync();
             return team;
+        }
+
+        public async Task<List<TeamPlayer>> GetAllTeamPlayers()
+        {
+            return await _context.TeamPlayers.Include(tp=>tp.Team).ToListAsync();
         }
 
         public async Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId)

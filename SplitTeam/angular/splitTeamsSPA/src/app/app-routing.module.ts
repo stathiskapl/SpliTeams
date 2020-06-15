@@ -9,6 +9,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { MatchListComponent } from './match-list/match-list.component';
+import { MatchDetailComponent } from './match-detail/match-detail.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'rankings', component: RankingsListComponent },
   { path: 'teams', component: TeamListComponent },
   { path: 'matches', component: MatchListComponent },
+  { path: 'matchesDetail', component: MatchDetailComponent },
   { path: 'users', component: UserListComponent },
   { path: 'users/:userId', component: UserDetailComponent },
 ];

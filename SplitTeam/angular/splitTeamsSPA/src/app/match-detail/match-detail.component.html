@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h1>Create new Match</h1>
+  <div class="row mt-4">
+    <p class="col col-lg-2">
+      Choose Team A
+    </p>
+    <select class="form-control col col-lg-4" [(ngModel)]="teamAName">
+      <option disabled="true" selected="true" class="form-control">
+        Choose Team A
+      </option>
+      <option
+        *ngFor="let team of teams"
+        [value]="team?.name"
+        class="form-control"
+      >
+        {{ team?.name }}
+      </option>
+    </select>
+  </div>
+  <div>
+    <div class="row mt-4">
+      <p class="col col-lg-2">
+        Choose Team B
+      </p>
+      <select class="form-control col col-lg-4" [(ngModel)]="teamBName">
+        <option disabled="true" selected="true" class="form-control">
+          Choose Team B
+        </option>
+        <option
+          *ngFor="let team of teams"
+          [value]="team?.name"
+          class="form-control"
+        >
+          {{ team?.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="mt-4">
+    <button class="btn btn-primary" type="button" [routerLink]="['/matches']">
+      Back To Matches
+    </button>
+    <button class="btn btn-success ml-2" type="button" (click)="test()">
+      Create Match
+    </button>
+  </div>
+</div>
