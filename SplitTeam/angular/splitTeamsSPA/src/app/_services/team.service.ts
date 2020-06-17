@@ -24,4 +24,7 @@ export class TeamService {
   getAllTeamsWithoutTeamPlayers(): Observable<Team[]> {
     return this.http.get<Team[]>(this.baseUrl + 'Team/getAllTeamsWithoutTeamPlayers');
   }
+  splitTeams(teamAid: number, teamBId: number, playerIds: number[]): Observable<TeamPlayer[]> {
+    return this.http.post<TeamPlayer[]>(this.baseUrl + 'Team/SplitTeams/' + teamAid + '/' + teamBId, playerIds);
+  }
 }

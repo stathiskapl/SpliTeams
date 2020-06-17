@@ -39,12 +39,12 @@ namespace SplitTeam.Controllers
             }
         }
         [Authorize(Roles = "Admin")]
-        [HttpPost("SplitTeams")]
-        public async Task<IActionResult> SplitTeams([FromBody] List<int> playerIds)
+        [HttpPost("SplitTeams/{teamAId}/{teamBId}")]
+        public async Task<IActionResult> SplitTeams([FromBody] List<int> playerIds, int teamAId, int teamBId)
         {
             try
             {
-                var playerTeams = await _teamService.SplitTeams(playerIds);
+                var playerTeams = await _teamService.SplitTeams(playerIds,teamAId,teamBId);
                 _log.LogInformation($"Returning {playerTeams.Count} playerTeams");
                 return Ok(playerTeams);
             }

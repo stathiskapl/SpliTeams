@@ -6,6 +6,8 @@ import { Match } from '../_modules/match';
 import { TeamService } from '../_services/team.service';
 import { TeamPlayer } from '../_modules/teamPlayer';
 import { NgbModalOptions, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Player } from '../_modules/player';
+import { PlayerService } from '../_services/player.service';
 
 @Component({
   selector: 'app-match-list',
@@ -15,12 +17,13 @@ import { NgbModalOptions, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng
 export class MatchListComponent implements OnInit {
   role: string;
   matches: Match[];
+  players: Player[];
   teamPlayers: TeamPlayer[];
   closeResult: string;
   modalOptions: NgbModalOptions;
   sumAVGRank: number;
   constructor(private matchService: MatchService, private router: Router, private modalService: NgbModal,
-    private toastr: ToastrService, private teamService: TeamService) {
+    private toastr: ToastrService, private teamService: TeamService, private playerService: PlayerService) {
     this.modalOptions = {
       backdrop: 'static',
       backdropClass: 'customBackdrop'
@@ -78,5 +81,11 @@ export class MatchListComponent implements OnInit {
     for (let teamP of teamPl) {
       this.sumAVGRank = this.sumAVGRank + teamP.player.averageRank;
     }
+  }
+  getAllPayers() {
+    this.playerService.getAllPayers().subscribe((data: Player[]) => {
+      this.players = data;
+    }, error => {
+    });
   }
 }

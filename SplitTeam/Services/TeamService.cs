@@ -11,7 +11,7 @@ namespace SplitTeam.Services
     public interface ITeamService
     {
         Task<Team> AddTeam(Team team);
-        Task<List<TeamPlayer>> SplitTeams(List<int> playerIds);
+        Task<List<TeamPlayer>> SplitTeams(List<int> playerIds, int teamAId, int teamBId);
         Task<List<Team>> GetAllTeams();
         Task<List<TeamPlayer>> GetAllTeamPlayersForTeamId(int teamId);
         Task<List<Team>> GetAllTeamsWithoutTeamPlayers();
@@ -22,11 +22,13 @@ namespace SplitTeam.Services
         private readonly ITeamRepository _repository;
         private readonly IPlayerRepository _playerRepository;
         private readonly IPlayerService _playerService;
-        public TeamService(ITeamRepository repository, IPlayerRepository playerRepository, IPlayerService playerService)
+        private readonly IMatchRepository _matchRepository;
+        public TeamService(ITeamRepository repository, IPlayerRepository playerRepository, IPlayerService playerService, IMatchRepository matchRepository)
         {
             _repository = repository;
             _playerRepository = playerRepository;
             _playerService = playerService;
+            _matchRepository = matchRepository;
         }
 
         public async Task<Team> AddTeam(Team team)
@@ -34,7 +36,7 @@ namespace SplitTeam.Services
             return await _repository.AddTeam(team);
         }
 
-        public async Task<List<TeamPlayer>> SplitTeams(List<int> playerIds)
+        public async Task<List<TeamPlayer>> SplitTeams(List<int> playerIds, int teamAId, int teamBId)
         {
             foreach (var playerId in playerIds)
             {
@@ -53,7 +55,12 @@ namespace SplitTeam.Services
 
             }
             //Teams are ok
-            var teamsPlayers = CalculateEqualTeams(players);
+            var teamsPlayers = CalculateEqualTeams(players,teamAId,teamBId);
+            await _matchRepository.CreateMatch(new Match()
+            {
+                TeamA = await _repository.GetTeamById(teamAId),
+                TeamB = await _repository.GetTeamById(teamBId)
+            });
             return await SaveTeamPlayers(teamsPlayers);
         }
 
@@ -72,7 +79,7 @@ namespace SplitTeam.Services
             return await _repository.SaveTeamPlayers(teamPlayers);
         }
 
-        private List<TeamPlayerDto> CalculateEqualTeams(List<Player> players)
+        private List<TeamPlayerDto> CalculateEqualTeams(List<Player> players, int teamAId, int teamBId)
         {
             var shuffledPlayers = players.OrderBy(a => Guid.NewGuid()).ToList();
             var listToReturn = new List<TeamPlayerDto>();
@@ -87,7 +94,7 @@ namespace SplitTeam.Services
                     {
                         Rank = players[i].AverageRank.Value,
                         PlayerId = players[i].Id,
-                        TeamId = 1
+                        TeamId = teamAId
                     });
                 }
                 else
@@ -96,7 +103,7 @@ namespace SplitTeam.Services
                     {
                         Rank = players[i].AverageRank.Value,
                         PlayerId = players[i].Id,
-                        TeamId = 2
+                        TeamId = teamBId
                     });
                 }
             }
@@ -114,7 +121,7 @@ namespace SplitTeam.Services
             }
             if (Math.Abs(sumTeamA - sumTeamB) > 2)
             {
-                return CalculateEqualTeams(shuffledPlayers);
+                return CalculateEqualTeams(shuffledPlayers,teamAId,teamBId);
             }
             else
             {
