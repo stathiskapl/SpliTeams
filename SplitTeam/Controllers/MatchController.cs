@@ -55,5 +55,36 @@ namespace SplitTeam.Controllers
                 return StatusCode(500, ex);
             }
         }
+        [HttpGet("Get/{matchId}")]
+        public async Task<IActionResult> Get(int matchId)
+        {
+            try
+            {
+                var match = await _matchService.GetMatchById(matchId);
+                _log.LogInformation($"Returning match with Id {match.Id}");
+                return Ok(match);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpPut("Update")]
+        public async Task<IActionResult> Update([FromBody] Match match)
+        {
+            try
+            {
+                await _matchService.UpdateMatch(match);
+                _log.LogInformation($"Returning updated match with id {match.Id}");
+                return Ok(match);
+            }
+            catch (Exception ex)
+            {
+                _log.LogError($"Something went wrong: {ex}");
+                return StatusCode(500, ex);
+            }
+        }
     }
 }

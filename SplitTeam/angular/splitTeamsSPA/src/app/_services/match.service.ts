@@ -16,4 +16,10 @@ export class MatchService {
   getAllMatches(): Observable<Match[]> {
     return this.http.get<Match[]>(this.baseUrl + 'Match/GetAll');
   }
+  updateMatch(match: Match): Observable<Match> {
+    return this.http.put<Match>(this.baseUrl + 'Match/Update', match);
+  }
+  getMatchById(matchId: number): Observable<Match> {
+    return this.http.get<Match>(this.baseUrl + 'Match/Get/' + matchId);
+  }
 }

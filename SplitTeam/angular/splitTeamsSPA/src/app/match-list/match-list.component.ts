@@ -45,6 +45,9 @@ export class MatchListComponent implements OnInit {
   getAllTeamPlayersForTeamId(teamId: number) {
     this.teamService.getAllTeamPlayersForTeamId(teamId).subscribe((data: TeamPlayer[]) => {
       this.teamPlayers = data;
+      this.teamPlayers.sort((a, b) =>
+        b.player.averageRank - a.player.averageRank
+      );
       this.getSumAvgForTeam(this.teamPlayers);
     }, error => {
       console.log(error);

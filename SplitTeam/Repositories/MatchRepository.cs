@@ -11,6 +11,10 @@ namespace SplitTeam.Repositories
     {
         Task<Match> CreateMatch(Match match);
         Task<List<Match>> GetAllMatches();
+        Task<Match> UpdateMatch(Match match);
+        Task<Match> GetMatchById(int matchId);
+        
+
     }
 
     public class MatchRepository : IMatchRepository
@@ -35,6 +39,22 @@ namespace SplitTeam.Repositories
                 .Include(m=>m.TeamA)
                 .Include(m => m.TeamB)
                 .ToListAsync();
+        }
+
+        public async Task<Match> GetMatchById(int matchId)
+        {
+            return await _context.Matches.Include(m=>m.TeamA).Include(m=>m.TeamB).FirstOrDefaultAsync(m => m.Id == matchId);
+        }
+
+        public async Task<Match> UpdateMatch(Match match)
+        {
+            var matchToUpdate = await _context.Matches.FirstOrDefaultAsync(m => m.Id == match.Id);
+            matchToUpdate.ScoreTeamA = match.ScoreTeamA;
+            matchToUpdate.ScoreTeamB = match.ScoreTeamB;
+            matchToUpdate.Description = match.Description;
+            _context.Update(matchToUpdate);
+            await _context.SaveChangesAsync();
+            return match;
         }
     }
 }

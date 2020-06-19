@@ -1,4 +1,4 @@
-<div class="container mt-4">
+<div class="container mt-4" *ngIf="matchId === 0">
   <h1>Create new Match</h1>
   <div class="row mt-4">
     <p class="col col-lg-2">
@@ -67,4 +67,88 @@
       Create Match
     </button>
   </div>
+</div>
+<div class="container mt-4" *ngIf="matchId != 0">
+  <form [formGroup]="matchForm" (ngSubmit)="updateMatch()" *ngIf="match">
+    <h2 class="text-center text-primary">Update Match</h2>
+    <hr />
+    <div class="form-group">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            matchForm.get('teamA').errors && matchForm.get('teamA').touched
+        }"
+        type="text"
+        class="form-control is-invalid"
+        formControlName="teamA"
+        disabled
+      />
+    </div>
+    <div class="form-group">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            matchForm.get('teamB').errors && matchForm.get('teamB').touched
+        }"
+        type="text"
+        class="form-control is-invalid"
+        formControlName="teamB"
+        disabled
+      />
+    </div>
+    <div class="form-group">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            matchForm.get('scoreTeamA').errors &&
+            matchForm.get('scoreTeamA').touched
+        }"
+        type="number"
+        class="form-control is-invalid"
+        formControlName="scoreTeamA"
+        placeholder="scoreTeamA"
+      />
+      <div class="invalid-feedback">Please choose a score</div>
+    </div>
+    <div class="form-group">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            matchForm.get('scoreTeamB').errors &&
+            matchForm.get('scoreTeamB').touched
+        }"
+        type="number"
+        class="form-control is-invalid"
+        formControlName="scoreTeamB"
+        placeholder="scoreTeamB"
+      />
+      <div class="invalid-feedback">Please choose a score</div>
+    </div>
+    <div class="form-group">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            matchForm.get('description').errors &&
+            matchForm.get('description').touched
+        }"
+        type="text"
+        class="form-control is-invalid"
+        formControlName="description"
+        placeholder="description"
+      />
+      <div class="invalid-feedback">Please choose a description</div>
+    </div>
+    <div>
+      <button class="btn btn-primary" type="button" [routerLink]="['/matches']">
+        Back To Matches
+      </button>
+      <button
+        class="btn btn-success ml-2"
+        [disabled]="!matchForm.valid"
+        type="submit"
+      >
+        Update
+      </button>
+    </div>
+  </form>
 </div>

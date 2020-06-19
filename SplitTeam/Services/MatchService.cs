@@ -8,8 +8,11 @@ namespace SplitTeam.Services
 {
     public interface IMatchService
     {
+        Task<Match> UpdateMatch(Match match);
         Task<Match> CreateMatch(Match match);
         Task<List<Match>> GetAllMatches();
+        Task<Match> GetMatchById(int matchId);
+
     }
 
     public class MatchService : IMatchService
@@ -29,6 +32,16 @@ namespace SplitTeam.Services
         public async Task<List<Match>> GetAllMatches()
         {
             return await _repository.GetAllMatches();
+        }
+
+        public async Task<Match> GetMatchById(int matchId)
+        {
+            return await _repository.GetMatchById(matchId);
+        }
+
+        public async Task<Match> UpdateMatch(Match match)
+        {
+            return await _repository.UpdateMatch(match);
         }
     }
 }
