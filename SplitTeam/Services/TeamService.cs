@@ -82,36 +82,31 @@ namespace SplitTeam.Services
         private List<TeamPlayerDto> CalculateEqualTeams(List<Player> players, int teamAId, int teamBId)
         {
             var shuffledPlayers = players.OrderBy(a => Guid.NewGuid()).ToList();
-            var listToReturn = new List<TeamPlayerDto>();
-            var teamA = shuffledPlayers.Take(shuffledPlayers.Count() / 2);
-            var teamB= shuffledPlayers.Skip(shuffledPlayers.Count() / 2);
-            var sumTeamA = teamA.Sum(t => t.AverageRank);
-            var sumTeamB = teamB.Sum(t => t.AverageRank);
-            foreach (var player in teamA)
-            {
-                listToReturn.Add(new TeamPlayerDto()
+            var teamA = shuffledPlayers.Take(shuffledPlayers.Count() / 2).Select(x =>
+                new TeamPlayerDto()
                 {
-                    Rank = player.AverageRank.Value,
-                    PlayerId = player.Id,
+                    Rank = x.AverageRank.Value,
+                    PlayerId = x.Id,
                     TeamId = teamAId
-                });
-            }
-            foreach (var player in teamB)
-            {
-                listToReturn.Add(new TeamPlayerDto()
+                }
+            );
+            var teamB= shuffledPlayers.Skip(shuffledPlayers.Count() / 2).Select(x =>
+                new TeamPlayerDto()
                 {
-                    Rank = player.AverageRank.Value,
-                    PlayerId = player.Id,
+                    Rank = x.AverageRank.Value,
+                    PlayerId = x.Id,
                     TeamId = teamBId
-                });
-            }
-            if (Math.Abs(sumTeamA.Value - sumTeamB.Value) > 2)
+                }
+            );
+            var sumTeamA = teamA.Sum(t => t.Rank);
+            var sumTeamB = teamB.Sum(t => t.Rank);
+            if (Math.Abs(sumTeamA - sumTeamB) > 2)
             {
                 return CalculateEqualTeams(shuffledPlayers,teamAId,teamBId);
             }
             else
             {
-                return listToReturn;
+                return teamA.Concat(teamB).ToList();
             }
         }
 
