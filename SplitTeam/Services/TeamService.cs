@@ -83,43 +83,29 @@ namespace SplitTeam.Services
         {
             var shuffledPlayers = players.OrderBy(a => Guid.NewGuid()).ToList();
             var listToReturn = new List<TeamPlayerDto>();
-            var teamA = new List<TeamPlayerDto>();
-            var teamB= new List<TeamPlayerDto>();
-            //FillTeams
-            for (int i = 0; i < players.Count; i++)
+            var teamA = shuffledPlayers.Take(shuffledPlayers.Count() / 2);
+            var teamB= shuffledPlayers.Skip(shuffledPlayers.Count() / 2);
+            var sumTeamA = teamA.Sum(t => t.AverageRank);
+            var sumTeamB = teamB.Sum(t => t.AverageRank);
+            foreach (var player in teamA)
             {
-                if (i % 2 == 0)
+                listToReturn.Add(new TeamPlayerDto()
                 {
-                    teamA.Add(new TeamPlayerDto()
-                    {
-                        Rank = players[i].AverageRank.Value,
-                        PlayerId = players[i].Id,
-                        TeamId = teamAId
-                    });
-                }
-                else
+                    Rank = player.AverageRank.Value,
+                    PlayerId = player.Id,
+                    TeamId = teamAId
+                });
+            }
+            foreach (var player in teamB)
+            {
+                listToReturn.Add(new TeamPlayerDto()
                 {
-                    teamB.Add(new TeamPlayerDto()
-                    {
-                        Rank = players[i].AverageRank.Value,
-                        PlayerId = players[i].Id,
-                        TeamId = teamBId
-                    });
-                }
+                    Rank = player.AverageRank.Value,
+                    PlayerId = player.Id,
+                    TeamId = teamBId
+                });
             }
-            decimal sumTeamA = 0;
-            foreach (var playerA in teamA)
-            {
-                sumTeamA = sumTeamA + playerA.Rank;
-                listToReturn.Add(playerA);
-            }
-            decimal sumTeamB = 0;
-            foreach (var playerB in teamB)
-            {
-                sumTeamB = sumTeamB + playerB.Rank;
-                listToReturn.Add(playerB);
-            }
-            if (Math.Abs(sumTeamA - sumTeamB) > 2)
+            if (Math.Abs(sumTeamA.Value - sumTeamB.Value) > 2)
             {
                 return CalculateEqualTeams(shuffledPlayers,teamAId,teamBId);
             }
