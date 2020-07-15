@@ -151,6 +151,18 @@ namespace SplitTeam
                 .AllowAnyMethod());
             app.UseAuthentication();
             seeder.SeedRoles();
+            app.Use(async (context, next) =>
+            {
+                await next();
+                if (context.Response.StatusCode == 404 && !System.IO.Path.HasExtension(context.Request.Path.Value))
+                {
+                    context.Request.Path = "/index.html";
+                    await next();
+                }
+            });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             seeder.SeedSkills();
             app.UseMvc();
         }

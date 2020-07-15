@@ -63,8 +63,8 @@ export function tokenGetter() {
       JwtModule.forRoot({
          config: {
             tokenGetter,
-            whitelistedDomains: ['localhost:5000'],
-            blacklistedRoutes: ['localhost:5000/api/user/Login', 'localhost:5000/api/user/Create']
+            whitelistedDomains: [environment.apiUrl2],
+            blacklistedRoutes: [environment.apiUrl2 + 'user/Login', environment.apiUrl2 + 'user/Create']
          }
       })
    ],
@@ -77,4 +77,6 @@ export function tokenGetter() {
 })
 export class AppModule {
    baseUrl = environment.apiUrl;
+   baseUrl2 = environment.apiUrl2;
+   // apiUrl: 'http://localhost:5000/api/'
 }
