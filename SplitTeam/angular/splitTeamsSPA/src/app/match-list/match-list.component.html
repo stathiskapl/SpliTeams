@@ -14,7 +14,7 @@
         <th style="width: 10%;">scoreA</th>
         <th style="width: 10%;">scoreB</th>
         <th style="width: 10%;">description</th>
-        <!-- <th>actions</th> -->
+        <th style="width: 10%;">actions</th>
       </tr>
     </thead>
     <tbody>
@@ -29,14 +29,14 @@
         <td style="width: 10%;">{{ match?.scoreTeamA }}</td>
         <td style="width: 10%;">{{ match?.scoreTeamB }}</td>
         <td style="width: 10%;">{{ match?.description }}</td>
-        <!-- <td>
+        <td style="width: 10%;">
           <button
             class="btn btn-success"
             [routerLink]="['/matches/', match?.id]"
           >
             Update
           </button>
-        </td> -->
+        </td>
       </tr>
     </tbody>
   </table>

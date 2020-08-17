@@ -113,6 +113,8 @@ namespace SplitTeam
             services.AddTransient<ITeamService, TeamService>();
             services.AddTransient<IMatchRepository, MatchRepository>();
             services.AddTransient<IMatchService, MatchService>();
+            services.AddTransient<IStatsRepository, StatsRepository>();
+            services.AddTransient<IStatsService, StatsService>();
 
         }
 
