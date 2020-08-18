@@ -10,6 +10,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { MatchListComponent } from './match-list/match-list.component';
 import { MatchDetailComponent } from './match-detail/match-detail.component';
+import { StatsComponent } from './stats/stats.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'matches/:matchId', component: MatchDetailComponent },
   { path: 'users', component: UserListComponent },
   { path: 'users/:userId', component: UserDetailComponent },
+  { path: 'stats', component: StatsComponent },
 ];
 
 @NgModule({

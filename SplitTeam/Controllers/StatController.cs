@@ -11,7 +11,7 @@ namespace SplitTeam.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class StatController : ControllerBase
     {
         private readonly ILogger<StatController> _log;

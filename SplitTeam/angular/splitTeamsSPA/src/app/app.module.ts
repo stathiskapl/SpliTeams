@@ -25,13 +25,14 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { MatchListComponent } from './match-list/match-list.component';
 import { MatchDetailComponent } from './match-detail/match-detail.component';
+import { StatsComponent } from './stats/stats.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
 }
 
 @NgModule({
-   declarations: [
+   declarations: [	
       AppComponent,
       NavBarComponent,
       PlayerDetailComponent,
@@ -47,7 +48,8 @@ export function tokenGetter() {
       UserListComponent,
       TeamListComponent,
       MatchListComponent,
-      MatchDetailComponent
+      MatchDetailComponent,
+      StatsComponent
    ],
    imports: [
       BrowserModule,
